@@ -1,3 +1,119 @@
+<style>
+
+</style>
+
+<section class="productsHotspot-{{ section.id }}">
+    <div class="custonContainer">
+        <div class="sectionHeading">{{ section.settings.sectionHeading }}</div>
+        <div class="gridContainer">
+            {% for block in section.blocks %}
+                {% assign product = section.settings.product %}
+                {% if product %}
+                    <div class="blockCard">
+                        {% if block.settings.image %}
+                            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ product.title }}" />
+                            <button class="quickView" data-modal-target="quick-view-{{ product.handle }}" style="top: {{ block.settings.popupVertical }}%; left: {{ block.settings.popupHorizontal }}%; transform: translate(-{{ block.settings.popupHorizontal }}%, -{{ block.settings.popupVertical }}%)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                                    <path d="M5.3457 1.04175V9.50329" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                    <path d="M1.11523 5.27246H9.57677" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        {% endif %}
+                        <div class="quickViewModal" id="quick-view-{{ product.handle }}" aria-hidden="true">
+                            <div class="modalContent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path d="M5.0376 4.94354L13.5229 13.4288" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                    <path d="M5.0376 13.4285L13.5229 4.94325" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+
+                                <div class="modalGrid">
+                                    <div class="productDeatils">
+                                        <img class="modalImage" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+                                        <div class="productDetail">
+                                            <h2 class="productTitle">{{ product.title }}</h2>
+                                            <p class="productPrice">{{ product.price | money }}</p>
+                                            <p class="productDescription">{{ product.description | strip_html }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="modalDetails">
+                                        {% assign color_index = -1 %}
+                                        {% assign size_index = -1 %}
+                                        {% for option in product.options_with_values %}
+                                        {% if option.name == "Color" %}
+                                            {% assign color_index = forloop.index0 %}
+                                        {% elsif option.name == "Size" %}
+                                            {% assign size_index = forloop.index0 %}
+                                        {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="/cart/add" class="quick-view-form" data-product-id="{{ product.id }}">
+                                        <input type="hidden" name="form_type" value="product" />
+                                        <input type="hidden" name="id" class="variant-id" value="{{ product.variants.first.id }}" />
+                                        <div class="color_swatches">
+                                            {% if color_index != -1 %}
+                                            <div class="option-label">Color</div>
+                                            <div class="swatches">
+                                                {% assign seen_colors = "" %}
+                                                {% for variant in product.variants %}
+                                                {% assign color = variant.options[color_index] %}
+                                                {% unless seen_colors contains color %}
+                                                    {% assign seen_colors = seen_colors | append: color | append: "," %}
+                                                    {% assign swatch_color = color | downcase %}
+                                                    <div
+                                                    class="swatch"
+                                                    data-color="{{ color }}"
+                                                    style="--swatch-color: {{ swatch_color | default: '#000' }};"
+                                                    >
+                                                    {{ color }}
+                                                    </div>
+                                                {% endunless %}
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="variants">
+                                            {% if size_index != -1 %}
+                                            <div class="option-label">Size</div>
+                                            <div class="custom-select-wrapper">
+                                                <select class="size-select">
+                                                <option value="">Choose your size</option>
+                                                {% assign seen_sizes = "" %}
+                                                {% for variant in product.variants %}
+                                                    {% assign size = variant.options[size_index] %}
+                                                    {% unless seen_sizes contains size %}
+                                                    {% assign seen_sizes = seen_sizes | append: size | append: "," %}
+                                                    <option value="{{ size }}">{{ size }}</option>
+                                                    {% endunless %}
+                                                {% endfor %}
+                                                </select>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <script type="application/json" id="variants-{{ product.id }}">
+                                            {{ product.variants | json }}
+                                        </script>
+                                        <button type="submit" class="add-to-cart-btn">
+                                            ADD TO CART
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="12" viewBox="0 0 36 12" fill="none">
+                                            <path d="M1.4093 5.25L0.659302 5.25L0.659302 6.75L1.4093 6.75L1.4093 5.25ZM35.6391 6.53033C35.932 6.23744 35.932 5.76257 35.6391 5.46967L30.8661 0.696701C30.5733 0.403808 30.0984 0.403808 29.8055 0.696701C29.5126 0.989594 29.5126 1.46447 29.8055 1.75736L34.0481 6L29.8055 10.2426C29.5126 10.5355 29.5126 11.0104 29.8055 11.3033C30.0984 11.5962 30.5732 11.5962 30.8661 11.3033L35.6391 6.53033ZM1.4093 6.75L35.1088 6.75L35.1088 5.25L1.4093 5.25L1.4093 6.75Z" fill="white"/>
+                                            </svg>
+                                        </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+
+</script>
+
 {% schema %}
     {
         "name": "Products Hotspot",
