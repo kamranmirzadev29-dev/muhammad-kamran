@@ -115,6 +115,15 @@
             width: 30px;
             height: 30px;
         }
+                .customHeader .menuArea {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+        }
+        .customHeader.menu-opened .menuArea {
+            opacity: 1;
+        }
     }
 </style>
 
@@ -162,11 +171,29 @@
 
 <script>
     const header = document.querySelector('.customHeader');
+    const menuArea = header.querySelector('.menuArea');
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
-    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+    function openMenu() {
+        header.classList.add('menu-opened');
+        menuArea.style.maxHeight = menuArea.scrollHeight + "px";
+    }
+
+    function closeMenu() {
+        header.classList.remove('menu-opened');
+        menuArea.style.maxHeight = "0";
+    }
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+
+    // Reset maxHeight on resize (in case of orientation change)
+    window.addEventListener('resize', () => {
+        if (header.classList.contains('menu-opened')) {
+            menuArea.style.maxHeight = menuArea.scrollHeight + "px";
+        }
+    });
 </script>
 
 {% schema %}
