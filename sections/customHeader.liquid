@@ -68,25 +68,37 @@
         font-size: 22px;
         cursor: pointer;
     }
+
+    /* Mobile Styles */
     @media (max-width: 820px) {
         .customHeader .subInnerContainer {
             display: flex;
             width: 100%;
+            justify-content: space-between;
+            align-items: center;
         }
-        .customHeader .headerText,
-        .customHeader .headerButton {
-            display: none;
-        }
-        .customHeader.menu-opened .headerText {
-            display: block;
-        }
-        .customHeader.menu-opened .headerButton {
-            display: flex;
-        }
+
         .customHeader .innerContainer {
             flex-direction: column;
             align-items: center;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease;
         }
+
+        .customHeader .headerText,
+        .customHeader .headerButton {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .customHeader.menu-opened .headerText,
+        .customHeader.menu-opened .headerButton {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .customHeader .logo {
             margin: 10px 0;
             width: 100%;
@@ -101,12 +113,10 @@
         }
         .customHeader .mobileMenuToggle {
             display: flex;
-            justify-content: space-between;
         }
         .customHeader #menu-close {
             display: none;
         }
-
         .customHeader.menu-opened #menu-open {
             display: none;
         }
@@ -118,31 +128,31 @@
 
 <header class="customHeader">
     <div class="customContainer">
-        <div class="innerContainer">
-            <div class="subInnerContainer">
-                <div class="mobileMenuToggle">
-                    <button id="menu-open" class="menuButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
-                            <path d="M1 6.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1 1.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1 11.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <button id="menu-close" class="menuButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                            <path d="M1 13.9997L13.7279 1.27177" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1 1.00031L13.7279 13.7282" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="logo">
-                    {% if section.settings.logo != blank %}
-                        <a href="/" title="Home">
-                            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
-                        </a>
-                    {% endif %}
-                </div>
+        <div class="subInnerContainer">
+            <div class="mobileMenuToggle">
+                <button id="menu-open" class="menuButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                        <path d="M1 6.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 1.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 11.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button id="menu-close" class="menuButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                        <path d="M1 13.9997L13.7279 1.27177" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 1.00031L13.7279 13.7282" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
+            <div class="logo">
+                {% if section.settings.logo != blank %}
+                    <a href="/" title="Home">
+                        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="innerContainer">
             <div class="headerText">{{ section.settings.centerText }}</div>
             {% if section.settings.buttonText != blank %}
                 <a href="{{ section.settings.buttonLink }}" class="headerButton">
@@ -158,11 +168,31 @@
 
 <script>
     const header = document.querySelector('.customHeader');
+    const menu = header.querySelector('.innerContainer');
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
-    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+    function openMenu() {
+        header.classList.add('menu-opened');
+        menu.style.maxHeight = menu.scrollHeight + "px"; // dynamic height
+    }
+
+    function closeMenu() {
+        header.classList.remove('menu-opened');
+        menu.style.maxHeight = "0px";
+    }
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+
+    // Reset on window resize (important if switching between desktop/mobile)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 820) {
+            menu.style.maxHeight = "none";
+        } else if (!header.classList.contains('menu-opened')) {
+            menu.style.maxHeight = "0px";
+        }
+    });
 </script>
 
 {% schema %}
