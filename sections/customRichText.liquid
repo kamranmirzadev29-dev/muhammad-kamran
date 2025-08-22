@@ -1,3 +1,10 @@
+<section class="richText-{{ section.id }}">
+    <div class="customContainer">
+        <div class="text small-hide">{{ section.settings.textForDesktop | strip_html }}</div>
+        <div class="text medium-hide large-up-hide">{{ section.settings.textForMobile | strip_html }}</div>
+    </div>
+</section>
+
 {% schema %}
     {
         "name": "Rich Text",
