@@ -290,8 +290,8 @@
                   <div class="productDetails">
                     <img class="modalImage" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
                     <div class="productDetail">
-                      <h2 class="productTitle">{{ product.title }}</h2>
-                      <p class="productPrice">{{ product.price | money }}</p>
+                      <p class="productTitle">{{ product.title }}</p>
+                      <h2 class="productPrice">{{ product.price | money }}</h2>
                       <p class="productDescription">{{ product.description | strip_html | truncate: 100 }}</p>
                     </div>
                   </div>
