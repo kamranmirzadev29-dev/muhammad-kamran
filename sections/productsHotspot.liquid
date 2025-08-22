@@ -158,7 +158,7 @@
     justify-content: center;
   }
   .productsHotspot-{{ section.id }} .swatches .customSwatch {
-    padding: 11px 13px;
+    {% comment %} padding: 11px 13px; {% endcomment %}
     font-size: 18px;
     font-weight: 400;
     color: black;
@@ -166,7 +166,7 @@
     border: 1px solid #000000;
     {% comment %} box-shadow: -7px 0 0 0 var(--swatch-color, #000); {% endcomment %}
     cursor: pointer;
-    min-width: 125px;
+    min-width: 130px;
     box-sizing: border-box;
     transition: all 0.2s ease;
     line-height: 1;
