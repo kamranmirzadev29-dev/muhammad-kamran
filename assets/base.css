@@ -4279,7 +4279,7 @@ text-component {
   }
 }
 
-.custom-container {
+.customContainer {
   width: 100%;
   max-width: 1370px;
   padding: 0 15px;
@@ -4287,7 +4287,7 @@ text-component {
 }
 
 @media screen and (max-width: 750px) {
-  .custom-container {
+  .customContainer {
     padding: 0;
   }
 }
