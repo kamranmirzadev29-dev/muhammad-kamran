@@ -16,6 +16,11 @@
     .richText-{{ section.id }} .text p {
         margin: 0;
     }
+    @media screen and (max-width: 767px) {
+       .richText-{{ section.id }} .text {
+            font-size: {{ section.settings.fontSizeForMobile }}
+        } 
+    }
 </style>
 
 <section class="richText-{{ section.id }}">
