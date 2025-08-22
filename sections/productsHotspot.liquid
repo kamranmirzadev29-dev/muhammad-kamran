@@ -397,6 +397,7 @@
   </div>
 </section>
 
+{% comment %}Get all products and get specific product "Dark winter jacket"{% endcomment %}
 {%- assign jacket_product = all_products['dark-winter-jacket'] -%}
 <script>
   window.jacketVariantId = {{ jacket_product.variants.first.id }};
@@ -404,17 +405,22 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    //To show quickview popup modal on clicking on quick view button
     document.querySelectorAll('.quickView').forEach(button => {
       button.addEventListener('click', function () {
         const targetId = this.dataset.modalTarget;
         document.getElementById(targetId).setAttribute('aria-hidden', 'false');
       });
     });
+    
+    //To close quickview popup modal on clicking on close quick view button
     document.querySelectorAll('.closeQuickView').forEach(btn => {
       btn.addEventListener('click', function () {
         this.closest('.quickViewModal').setAttribute('aria-hidden', 'true');
       });
     });
+
+    //Getting all product information by form like variant-id, get swatches, size variant
     document.querySelectorAll('.quick-view-form').forEach(form => {
       const variantInput = form.querySelector('.variant-id');
       const swatches = form.querySelectorAll('.customSwatch');
@@ -423,13 +429,17 @@
       if (!variantsJson) return;
       const variants = JSON.parse(variantsJson.textContent);
 
+      //To add active class in swatch
       function getSelectedColor() {
         const activeSwatch = form.querySelector('.customSwatch.active');
         return activeSwatch ? activeSwatch.dataset.color : null;
       }
+
       function getSelectedSize() {
         return sizeSelect?.value || null;
       }
+
+      //Selected variant combination and there matches id
       function updateVariantId() {
         const color = getSelectedColor();
         const size = getSelectedSize();
@@ -442,6 +452,7 @@
         }
       }
 
+      //To add/remove active class in swatches
       swatches.forEach(customSwatch => {
         customSwatch.addEventListener('click', () => {
           swatches.forEach(s => s.classList.remove('active'));
@@ -450,6 +461,7 @@
         });
       });
 
+      //To add/remove selected class in variant size
       if (sizeSelect) {
         sizeSelect.addEventListener('change', () => {
           updateVariantId();
@@ -465,6 +477,7 @@
         });
       }
 
+      //To add required product when variant combination (Black & M) Matches
       form.addEventListener('submit', function (e) {
         const selectedColor = getSelectedColor();
         const selectedSize = getSelectedSize();
