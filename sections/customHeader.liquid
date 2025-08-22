@@ -52,6 +52,15 @@
     </div>
 </header>
 
+<script>
+    const header = document.qureySelector('.customHeader-{{ section.id }}');
+    const openBtn = document.getElementById('menu-open');
+    const closeBtn = document.getElementById('menu-close');
+
+    openBtn?.addEventListner('click', () => header.classList.add('menu-opened'));
+    closeBtn?.addEventListner('click', () => header.classList.remove('menu-opened'));
+</script>
+
 {% schema %}
     {
         "name": "Header",
