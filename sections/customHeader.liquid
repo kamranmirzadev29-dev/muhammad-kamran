@@ -173,9 +173,65 @@
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
-    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+    const headerText = header.querySelector('.headerText');
+    const headerButton = header.querySelector('.headerButton');
+
+    function isMobile() {
+        return window.innerWidth <= 820;
+    }
+
+    const openMenu = () => {
+        if (!isMobile()) return;
+
+        header.classList.add('menu-opened');
+
+        if (headerText) {
+            headerText.style.maxHeight = headerText.scrollHeight + 'px';
+        }
+
+        if (headerButton) {
+            headerButton.style.maxHeight = headerButton.scrollHeight + 'px';
+        }
+    };
+
+    const closeMenu = () => {
+        if (!isMobile()) return;
+
+        if (headerText) {
+            headerText.style.maxHeight = headerText.scrollHeight + 'px';
+            void headerText.offsetHeight; // force reflow
+            headerText.style.maxHeight = '0px';
+        }
+
+        if (headerButton) {
+            headerButton.style.maxHeight = headerButton.scrollHeight + 'px';
+            void headerButton.offsetHeight;
+            headerButton.style.maxHeight = '0px';
+        }
+
+        header.classList.remove('menu-opened');
+    };
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+
+    [headerText, headerButton].forEach((el) => {
+        el?.addEventListener('transitionend', () => {
+            if (!header.classList.contains('menu-opened')) {
+                el.style.maxHeight = '';
+            }
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        if (!isMobile()) {
+            header.classList.remove('menu-opened');
+            if (headerText) headerText.style.maxHeight = '';
+            if (headerButton) headerButton.style.maxHeight = '';
+        }
+    });
 </script>
+
 
 {% schema %}
     {
