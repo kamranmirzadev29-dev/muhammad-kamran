@@ -115,15 +115,6 @@
             width: 30px;
             height: 30px;
         }
-                .customHeader .menuArea {
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-        }
-        .customHeader.menu-opened .menuArea {
-            opacity: 1;
-        }
     }
 </style>
 
@@ -154,46 +145,26 @@
                     {% endif %}
                 </div>
             </div>
-<div class="menuArea">
-    <div class="headerText">{{ section.settings.centerText }}</div>
-    {% if section.settings.buttonText != blank %}
-        <a href="{{ section.settings.buttonLink }}" class="headerButton">
-            {{ section.settings.buttonText }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
-                <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
-            </svg>
-        </a>
-    {% endif %}
-</div>
+            <div class="headerText">{{ section.settings.centerText }}</div>
+            {% if section.settings.buttonText != blank %}
+                <a href="{{ section.settings.buttonLink }}" class="headerButton">
+                    {{ section.settings.buttonText }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
+                        <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
+                    </svg>
+                </a>
+            {% endif %}
         </div>
     </div>
 </header>
 
 <script>
     const header = document.querySelector('.customHeader');
-    const menuArea = header.querySelector('.menuArea');
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    function openMenu() {
-        header.classList.add('menu-opened');
-        menuArea.style.maxHeight = menuArea.scrollHeight + "px";
-    }
-
-    function closeMenu() {
-        header.classList.remove('menu-opened');
-        menuArea.style.maxHeight = "0";
-    }
-
-    openBtn?.addEventListener('click', openMenu);
-    closeBtn?.addEventListener('click', closeMenu);
-
-    // Reset maxHeight on resize (in case of orientation change)
-    window.addEventListener('resize', () => {
-        if (header.classList.contains('menu-opened')) {
-            menuArea.style.maxHeight = menuArea.scrollHeight + "px";
-        }
-    });
+    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
+    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
 </script>
 
 {% schema %}
