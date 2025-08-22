@@ -278,8 +278,8 @@
           "settings": {
             "productImage": "shopify://shop_images/image_826.png",
             "product": "classic-varsity-top",
-            "popupVertical": 10,
-            "popupHorizontal": 10
+            "popupVertical": 30,
+            "popupHorizontal": 45
           }
         },
         "image_card_FPjLXf": {
