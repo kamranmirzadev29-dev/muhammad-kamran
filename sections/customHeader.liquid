@@ -86,8 +86,8 @@
             justify-content: center;
         }
 
-        /* Menu container that expands/collapses */
-        .customHeader .menuContent {
+        /* Smooth collapse area */
+        .customHeader .menuArea {
             overflow: hidden;
             max-height: 0;
             opacity: 0;
@@ -95,8 +95,8 @@
             width: 100%;
             text-align: center;
         }
-        .customHeader.menu-opened .menuContent {
-            max-height: 500px; /* big enough to fit content */
+        .customHeader.menu-opened .menuArea {
+            max-height: 400px; /* big enough for text + button */
             opacity: 1;
         }
 
@@ -156,8 +156,8 @@
                 </div>
             </div>
 
-            <!-- Collapsible menu content -->
-            <div class="menuContent">
+            <!-- This area collapses/expands smoothly -->
+            <div class="menuArea">
                 <div class="headerText">{{ section.settings.centerText }}</div>
                 {% if section.settings.buttonText != blank %}
                     <a href="{{ section.settings.buttonLink }}" class="headerButton">
@@ -180,7 +180,6 @@
     openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
     closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
 </script>
-
 
 {% schema %}
     {
