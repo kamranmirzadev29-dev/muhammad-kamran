@@ -285,7 +285,8 @@
         "image_card_FPjLXf": {
           "type": "imageCard",
           "settings": {
-            "product": "",
+            "productImage": "shopify://shop_images/image_827.png",
+            "product": "dark-denim-top",
             "popupVertical": 10,
             "popupHorizontal": 10
           }
