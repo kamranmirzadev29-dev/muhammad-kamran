@@ -163,32 +163,8 @@ const header = document.querySelector('.customHeader');
 const openBtn = document.getElementById('menu-open');
 const closeBtn = document.getElementById('menu-close');
 
-openBtn?.addEventListener('click', () => {
-  // Set explicit height to scrollHeight for transition
-  header.style.height = header.scrollHeight + 'px';
-
-  // Add class that styles other things if needed
-  header.classList.add('menu-opened');
-
-  // When transition ends, clear inline height to allow natural height (auto)
-  header.addEventListener('transitionend', function handler() {
-    header.style.height = 'auto';
-    header.removeEventListener('transitionend', handler);
-  });
-});
-
-closeBtn?.addEventListener('click', () => {
-  // To close, fix height first so transition works
-  header.style.height = header.scrollHeight + 'px';
-
-  // Force reflow
-  header.offsetHeight;
-
-  // Then set height to 0 for transition to animate close
-  header.style.height = '0px';
-
-  header.classList.remove('menu-opened');
-});
+openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
+closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
 
 </script>
 
