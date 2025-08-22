@@ -1,0 +1,45 @@
+{% schema %}
+    {
+        "name": "Rich Text",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Section Content"
+            },
+            {
+                "type": "richtext",
+                "id": "textForDesktop",
+                "label": "Text For Desktop",
+                "default": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>"
+            },
+            {
+                "type": "richtext",
+                "id": "textForMobile",
+                "label": "Text For Mobile",
+                "default": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>"
+            },
+            {
+                "type": "header",
+                "content": "Section Color" 
+            },
+            {
+                "type": "color",
+                "id": "sectionBackgroundColor",
+                "label": "Section Background Color",
+                "default": "#F5F5F5"
+            },
+            {
+                "type": "color",
+                "id": "sectionTextColor",
+                "label": "Section Text Color",
+                "default": "#000000"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Rich Text",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}
