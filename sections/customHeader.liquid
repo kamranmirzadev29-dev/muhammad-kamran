@@ -159,15 +159,49 @@
 </header>
 
 <script>
-    const header = document.querySelector('.customHeader');
+const header = document.querySelector('.customHeader');
 const openBtn = document.getElementById('menu-open');
 const closeBtn = document.getElementById('menu-close');
 
-// Add transition style via JS
-header.style.transition = 'all 0.3s ease-in-out';
+openBtn?.addEventListener('click', () => {
+  // Get the scrollHeight (full content height)
+  const fullHeight = header.scrollHeight;
 
-openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
-closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+  // Set height explicitly to current computed height so transition starts
+  header.style.height = header.offsetHeight + 'px';
+
+  // Force reflow so transition happens
+  header.offsetHeight; // trigger reflow
+
+  // Animate to full content height
+  header.style.transition = 'height 0.3s ease-in-out';
+  header.style.height = fullHeight + 'px';
+
+  // Add class to mark opened state if needed for other styles
+  header.classList.add('menu-opened');
+});
+
+closeBtn?.addEventListener('click', () => {
+  // Set height to current height (should be full height)
+  header.style.height = header.offsetHeight + 'px';
+
+  // Force reflow
+  header.offsetHeight;
+
+  // Animate height to 0 (collapsed)
+  header.style.transition = 'height 0.3s ease-in-out';
+  header.style.height = '0px';
+
+  header.classList.remove('menu-opened');
+  
+  // Optional: after animation, clear inline height to allow natural height again
+  header.addEventListener('transitionend', function handler() {
+    if (!header.classList.contains('menu-opened')) {
+      header.style.height = null;
+    }
+    header.removeEventListener('transitionend', handler);
+  });
+});
 
 </script>
 
