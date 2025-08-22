@@ -115,6 +115,18 @@
             width: 30px;
             height: 30px;
         }
+        .customHeader {
+  max-height: 0;
+  overflow: hidden;
+  {% comment %} opacity: 0; {% endcomment %}
+  {% comment %} padding: 0 20px; {% endcomment %}
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.customHeader.menu-opened {
+  max-height: 500px;
+  opacity: 1;
+}
     }
 </style>
 
@@ -165,7 +177,6 @@ const closeBtn = document.getElementById('menu-close');
 
 openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
 closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
-
 </script>
 
 {% schema %}
