@@ -15,12 +15,13 @@
       "type": "customHeader",
       "name": "Custom Header",
       "settings": {
+        "logo": "shopify://shop_images/Group_1000007858.svg",
         "centerText": "Find the ideal gift for your loved ones.",
         "buttonText": "choose gift",
         "buttonLink": "",
-        "headerBackgroundColor": "#F5F5F5",
+        "headerBackgroundColor": "#f5f5f5",
         "textColor": "#000000",
-        "buttonBackgroundColor": "#FFF544",
+        "buttonBackgroundColor": "#fff544",
         "headerTopPadding": 10,
         "headerBottomPadding": 10
       }
