@@ -212,6 +212,7 @@
         "mobileImage": "shopify://shop_images/Frame_3.png",
         "heading": "The Gift Guide",
         "subHeading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "subHeadingMobile": "Discover Joy: Your Ultimate Holiday Gift Destination.",
         "buttonText": "Shop Now",
         "buttonLink": "",
         "textAlignmnent": "left",
@@ -241,7 +242,7 @@
           "type": "imageCard",
           "settings": {
             "productImage": "shopify://shop_images/image_822.png",
-            "product": "black-leather-bag",
+            "product": "",
             "popupVertical": 60,
             "popupHorizontal": 60
           }
