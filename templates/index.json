@@ -251,8 +251,8 @@
           "settings": {
             "productImage": "shopify://shop_images/image_823.png",
             "product": "blue-silk-tuxedo",
-            "popupVertical": 10,
-            "popupHorizontal": 10
+            "popupVertical": 55,
+            "popupHorizontal": 90
           }
         },
         "image_card_6bTHWA": {
