@@ -276,7 +276,8 @@
         "image_card_KNCVUw": {
           "type": "imageCard",
           "settings": {
-            "product": "",
+            "productImage": "shopify://shop_images/image_826.png",
+            "product": "classic-varsity-top",
             "popupVertical": 10,
             "popupHorizontal": 10
           }
