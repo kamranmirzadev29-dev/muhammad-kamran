@@ -181,17 +181,21 @@
                 var bannerText = document.querySelector('.bannerText');
 
                 if (container && bannerText) {
-                    var offset = conatiner.getBoundingClientRect().left + window.scrollX;
+                    var offset = container.getBoundingClientRect().left + window.scrollX;
                     bannerText.style.paddingLeft = offset + 'px';
+                }
+            } else {
+                // Reset padding on small screens
+                var bannerText = document.querySelector('.bannerText');
+                if (bannerText) {
+                    bannerText.style.paddingLeft = '';
                 }
             }
         }
 
         adjustBannerPadding();
 
-        window.addEventListener('resize', function () {
-            adjustBannerPadding();
-        });
+        window.addEventListener('resize', adjustBannerPadding);
     });
 </script>
 
