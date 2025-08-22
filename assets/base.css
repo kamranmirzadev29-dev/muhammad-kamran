@@ -4278,3 +4278,16 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+.custom-container {
+  width: 100%;
+  max-width: 1370px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 750px) {
+  .custom-container {
+    padding: 0;
+  }
+}
