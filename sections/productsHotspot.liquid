@@ -152,7 +152,7 @@
     align-items: center;
     justify-content: center;
   }
-  .productsHotspot-{{ section.id }} .swatches .swatch {
+  .productsHotspot-{{ section.id }} .swatches .customSwatch {
     padding: 11px 13px;
     font-size: 18px;
     font-weight: 400;
@@ -166,7 +166,7 @@
     transition: all 0.2s ease;
     line-height: 1;
   }
-  .productsHotspot-{{ section.id }} .swatch.active {
+  .productsHotspot-{{ section.id }} .customSwatch.active {
     background: black;
     color: white;
   }
@@ -319,7 +319,7 @@
                                 {% assign seen_colors = seen_colors | append: color | append: "," %}
                                 {% assign swatch_color = color | downcase %}
                                 <div
-                                  class="swatch"
+                                  class="customSwatch"
                                   data-color="{{ color }}"
                                   style="--swatch-color: {{ swatch_color | default: '#000' }};"
                                 >
@@ -384,13 +384,13 @@
     });
     document.querySelectorAll('.quick-view-form').forEach(form => {
       const variantInput = form.querySelector('.variant-id');
-      const swatches = form.querySelectorAll('.swatch');
+      const swatches = form.querySelectorAll('.customSwatch');
       const sizeSelect = form.querySelector('.size-select');
       const variantsJson = document.getElementById(`variants-${form.dataset.productId}`);
       if (!variantsJson) return;
       const variants = JSON.parse(variantsJson.textContent);
       function getSelectedColor() {
-        const activeSwatch = form.querySelector('.swatch.active');
+        const activeSwatch = form.querySelector('.customSwatch.active');
         return activeSwatch ? activeSwatch.dataset.color : null;
       }
       function getSelectedSize() {
@@ -407,10 +407,10 @@
           variantInput.value = matched.id;
         }
       }
-      swatches.forEach(swatch => {
-        swatch.addEventListener('click', () => {
+      swatches.forEach(customSwatch => {
+        customSwatch.addEventListener('click', () => {
           swatches.forEach(s => s.classList.remove('active'));
-          swatch.classList.add('active');
+          customSwatch.classList.add('active');
           updateVariantId();
         });
       });
