@@ -10,6 +10,23 @@
 {
   "name": "customHeader-group",
   "type": "header",
-  "sections": {},
-  "order": []
+  "sections": {
+    "custom_header_AVyQfL": {
+      "type": "customHeader",
+      "name": "Custom Header",
+      "settings": {
+        "centerText": "Find the ideal gift for your loved ones.",
+        "buttonText": "choose gift",
+        "buttonLink": "",
+        "headerBackgroundColor": "#F5F5F5",
+        "textColor": "#000000",
+        "buttonBackgroundColor": "#FFF544",
+        "headerTopPadding": 10,
+        "headerBottomPadding": 10
+      }
+    }
+  },
+  "order": [
+    "custom_header_AVyQfL"
+  ]
 }
