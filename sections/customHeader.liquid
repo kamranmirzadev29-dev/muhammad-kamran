@@ -113,6 +113,18 @@
         .customHeader.menu-opened #menu-close {
             display: inline-block;
         }
+        .customHeader .headerText,
+        .customHeader .headerButton {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+        }
+
+        .customHeader.menu-opened .headerText,
+        .customHeader.menu-opened .headerButton {
+            opacity: 1;
+        }
     }
 </style>
 
