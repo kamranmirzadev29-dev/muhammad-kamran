@@ -10,6 +10,42 @@
         justify-content: space-between;
         flex-wrap: wrap;
     }
+    .customHeader .logo {
+        width: 200px;
+        max-width: 100%;
+    }
+    .customHeader .logo a {
+        display: flex;
+        justify-content: center;
+    }
+    .customHeader .logo img {
+        max-height: 40px;
+    }
+    .customHeader .headerText {
+        text-align: center;
+        font-size: 16px;
+        color: {{ section.settings.textColor }};
+    }
+    .customHeader .headerButton {
+        background: linear-gradient(to left, {{ section.settings.buttonBackgroundColor }} 50%, black 50%);
+        background-size; 200% 100%;
+        background-position: right bottom;
+        padding: 11px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: {{ section.settings.textColor }};
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        max-width: 200px;
+        width: 100%;
+        line-height: normal;
+        margin: 0;
+        transition: background-position 0.3s ease, color 0.3s ease;
+    }
 </style>
 
 <header class="customHeader">
