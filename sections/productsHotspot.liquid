@@ -369,6 +369,11 @@
   </div>
 </section>
 
+{%- assign jacket_product = all_products['dark-winter-jacket'] -%}
+<script>
+  window.jacketVariantId = {{ jacket_product.variants.first.id }};
+</script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.quickView').forEach(button => {
@@ -389,6 +394,7 @@
       const variantsJson = document.getElementById(`variants-${form.dataset.productId}`);
       if (!variantsJson) return;
       const variants = JSON.parse(variantsJson.textContent);
+
       function getSelectedColor() {
         const activeSwatch = form.querySelector('.customSwatch.active');
         return activeSwatch ? activeSwatch.dataset.color : null;
@@ -407,6 +413,7 @@
           variantInput.value = matched.id;
         }
       }
+
       swatches.forEach(customSwatch => {
         customSwatch.addEventListener('click', () => {
           swatches.forEach(s => s.classList.remove('active'));
@@ -414,6 +421,7 @@
           updateVariantId();
         });
       });
+
       if (sizeSelect) {
         sizeSelect.addEventListener('change', () => {
           updateVariantId();
@@ -428,6 +436,7 @@
           });
         });
       }
+
       form.addEventListener('submit', function (e) {
         const selectedColor = getSelectedColor();
         const selectedSize = getSelectedSize();
@@ -461,7 +470,6 @@
     });
   });
 </script>
-
 
 {% schema %}
     {
