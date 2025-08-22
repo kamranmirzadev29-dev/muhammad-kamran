@@ -1,7 +1,141 @@
-<style></style>
+<style>
+    .imageBanner-{{ section.id }} {
+        position: relative;
+        text-align: center;
+        padding: 0;
+    }
+    .imageBanner-{{ section.id }} .bannerContent {
+        position: relative;
+    }
+    .imageBanner-{{ section.id }}.bannerImage {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .imageBanner-{{ section.id }} .bannerImage.imageText {
+        width: 60%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .imageBanner-{{ section.id }} .bannerText {
+        padding: 2rem 0rem 0rem;
+        max-width: 40%;
+        color: {{ section.settings.textColor }};
+    }
+    .imageBanner-{{ section.id }} .heading {
+        font-size: 70px;
+        font-weight: 700;
+        color: {{ section.settings.textColor }};
+        margin: 0 0 50px;
+    }
+    .imageBanner-{{ section.id }} .description {
+        font-size: 20px;
+        font-weight: 400;
+        color: {{ section.settings.textColor }};
+        margin: 0 0 50px;
+        line-height: normal;
+    }
+    .imageBanner-{{ section.id }} .text-left {
+        text-align: left;
+    }
+    .imageBanner-{{ section.id }} .text-center {
+        text-align: center;
+    }
+    .imageBanner-{{ section.id }} .text-right {
+        text-align: right;
+    }
+    .imageBanner-{{ section.id }} .bannerButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 1.5rem 1.5rem;
+        background: linear-gradient(to left, {{ section.settings.buttonBackgroundColor }} 50%, #FFF544 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        color: {{ section.settings.buttonText }};
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 400;
+        max-width: 220px;
+        width: 100%;
+        text-transform: uppercase;
+        transition: background-position 0.3s ease, color 0.3s ease;
+    }
+    .imageBanner-{{ section.id }} .bannerButton:hover {
+        background-position: left bottom;
+        color: black;
+    }
+    .imageBanner-{{ section.id }} .bannerButton svg path {
+        transition: fill 0.3s ease;
+    }
+    .imageBanner-{{ section.id }} .bannerButton:hover svg path {
+        fill: black;
+    }
+    .imageBanner-{{ section.id }} .imageWithText {
+        display: flex;
+        align-items: flex-start;
+    }
+    @media screen and (min-width: 1199px) and (max-width: 1439px) {
+        .imageBanner-{{ section.id }} .bannerText {
+            padding: 1rem 0rem 0rem;
+            max-width: 50%;
+        }
+        .imageBanner-{{ section.id }} .bannerImage.imageText {
+            max-width: 50%;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .heading {
+            margin-bottom: 20px;
+            font-size: 48px;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .description {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    }
+    @media (max-width: 1199px) {
+        .imageBanner-{{ section.id }} .bannerContent {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        .imageBanner-{{ section.id }} .bannerContent .bannerText {
+            text-align: center;
+            position: relative !important;
+            left: 0 !important;
+            top: 0;
+            width: 100%;
+            max-width: 100%;
+            padding: 5.5rem !important;
+        }
+        .imageBanner-{{ section.id }} .heading {
+            font-size: 36px;
+        }
+        .imageBanner-{{ section.id }} .mobileImageAndButton {
+            position: relative;
+        }
+        .imageBanner-{{ section.id }} .bannerButton.mobile {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -80%);
+        }
+    }
+    @media (max-width: 750px) {
+        .imageBanner-{{ section.id }} .bannerContent .bannerText {
+            padding: 12px !important;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .heading {
+            margin-bottom: 20px;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .description {
+            margin-bottom: 20px;
+        }
+    }
+</style>
 
 <section class="imageBanner-{{ section.id }}">
-    <div class="banner-content">
+    <div class="bannerContent">
         {% if section.settings.desktopImage != blank %}
             <img src="{{ section.settings.desktopImage | image_url }}" alt="{{ section.settings.heading }}" class="bannerImage small-hide medium-hide">
         {% endif %}
@@ -20,7 +154,7 @@
         </div>
     </div>
     <div class="imageWithText">
-        <div class="bannerText">
+        <div class="bannerText text-{{ section.settings.textAlignmnent }}">
             <h2 class="heading">{{ section.settings.heading }}</h2>
             <p class="description">{{ section.settings.subHeading }}</p>
             {% if section.settings.buttonText != blank %}
