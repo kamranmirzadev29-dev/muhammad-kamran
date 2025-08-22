@@ -1,203 +1,169 @@
 <style>
     .customHeader {
-        background: white;
-        border-bottom: 1px solid #ddd;
-        padding: 10px 15px;
+        background: {{ section.settings.headerBackgroundColor }};
+        padding-top: {{ section.settings.headerTopPadding }}px;
+        padding-bottom: {{ section.settings.headerBottomPadding }}px;
     }
-
-    /* --- Desktop Layout --- */
-    .customHeader .desktopContainer {
+    .customHeader .innerContainer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        max-width: 1200px;
-        margin: 0 auto;
-        gap: 20px;
+        flex-wrap: wrap;
     }
-
+    .customHeader .logo {
+        width: 200px;
+        max-width: 100%;
+    }
+    .customHeader .logo a {
+        display: flex;
+        justify-content: center;
+    }
     .customHeader .logo img {
         max-height: 40px;
     }
-
     .customHeader .headerText {
         text-align: center;
         font-size: 16px;
-        color: #111;
-        flex: 1;
+        color: {{ section.settings.textColor }};
     }
-
     .customHeader .headerButton {
-        background: #ffe800; /* yellow button */
-        padding: 12px 22px;
+        background: linear-gradient(to left, {{ section.settings.buttonBackgroundColor }} 50%, black 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        padding: 11px;
         text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 16px;
+        font-weight: 400;
         text-transform: uppercase;
-        color: #000;
+        color: {{ section.settings.textColor }};
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        border: none;
-        cursor: pointer;
-        transition: background 0.3s ease;
+        gap: 10px;
+        max-width: 200px;
+        width: 100%;
+        line-height: normal;
+        margin: 0;
+        transition: background-position 0.3s ease, color 0.3s ease;
+    }
+    .customHeader .headerButton svg path {
+        transition: fill 0.3s ease;
     }
     .customHeader .headerButton:hover {
-        background: #000;
-        color: #fff;
+        color: white;
+        background-position: left bottom;
+    }
+    .customHeader .headerButton:hover svg path {
+        fill: white;
     }
     .customHeader .headerButton svg {
-        width: 18px;
-        height: 12px;
+        margin-left: 4px;
     }
-
-    /* --- Mobile Layout --- */
-    .customHeader .mobileTopbar {
+    .customHeader .mobileMenuToggle {
         display: none;
     }
-
+    .customHeader .menuButton {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+    }
     @media (max-width: 820px) {
-        .customHeader .desktopContainer {
+        .customHeader .subInnerContainer {
+            display: flex;
+            width: 100%;
+        }
+        .customHeader .headerText,
+        .customHeader .headerButton {
+            display: none;
+        }
+        .customHeader.menu-opened .headerText {
+            display: block;
+        }
+        .customHeader.menu-opened .headerButton {
+            display: flex;
+        }
+        .customHeader .innerContainer {
+            flex-direction: column;
+            align-items: center;
+        }
+        .customHeader .logo {
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .customHeader .headerText {
+            margin: 25px 0 10px;
+        }
+        .customHeader .headerButton {
+            margin: 10px 0;
+        }
+        .customHeader .mobileMenuToggle {
+            display: flex;
+            justify-content: space-between;
+        }
+        .customHeader #menu-close {
             display: none;
         }
 
-        /* Top bar */
-        .customHeader .mobileTopbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .customHeader.menu-opened #menu-open {
+            display: none;
         }
-
-        .customHeader .mobileTopbar .logo {
-            font-size: 18px;
-            font-weight: 700;
-            text-transform: uppercase;
+        .customHeader.menu-opened #menu-close {
+            display: inline-block;
         }
-
-        .customHeader .menuButton {
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        /* Dropdown Panel */
-        .customHeader .mobileMenu {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.4s ease;
-            text-align: center;
-        }
-        .customHeader.menu-opened .mobileMenu {
-            max-height: 400px; /* enough to show all */
-        }
-
-        .customHeader .mobileMenu .logo {
-            font-weight: 700;
-            margin: 15px 0;
-            font-size: 18px;
-        }
-
-        .customHeader .mobileMenu .headerText {
-            margin: 10px 0;
-            font-size: 15px;
-            color: #444;
-        }
-
-        .customHeader .mobileMenu .headerButton {
-            margin: 15px auto;
-        }
-
-        /* Hide/Show toggle icons */
-        #menu-close { display: none; }
-        .customHeader.menu-opened #menu-open { display: none; }
-        .customHeader.menu-opened #menu-close { display: inline-block; }
     }
 </style>
 
 <header class="customHeader">
-    <!-- Mobile Top Bar -->
-    <div class="mobileTopbar">
-        <button id="menu-open" class="menuButton">☰</button>
-        <div class="logo">
-            {% if section.settings.logo != blank %}
-                <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
-            {% else %}
-                {{ shop.name }}
+    <div class="customContainer">
+        <div class="innerContainer">
+            <div class="subInnerContainer">
+                <div class="mobileMenuToggle">
+                    <button id="menu-open" class="menuButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                            <path d="M1 6.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 11.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button id="menu-close" class="menuButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                            <path d="M1 13.9997L13.7279 1.27177" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1.00031L13.7279 13.7282" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="logo">
+                    {% if section.settings.logo != blank %}
+                        <a href="/" title="Home">
+                            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="headerText">{{ section.settings.centerText }}</div>
+            {% if section.settings.buttonText != blank %}
+                <a href="{{ section.settings.buttonLink }}" class="headerButton">
+                    {{ section.settings.buttonText }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
+                        <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
+                    </svg>
+                </a>
             {% endif %}
         </div>
-        <button id="menu-close" class="menuButton">✕</button>
-    </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div class="mobileMenu">
-        <div class="logo">
-            {% if section.settings.logo != blank %}
-                <img src="{{ section.settings.logo | image_url: width: 160 }}" alt="Logo">
-            {% else %}
-                {{ shop.name }}
-            {% endif %}
-        </div>
-        <div class="headerText">{{ section.settings.centerText }}</div>
-        {% if section.settings.buttonText != blank %}
-            <a href="{{ section.settings.buttonLink }}" class="headerButton">
-                {{ section.settings.buttonText }}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
-        {% endif %}
-    </div>
-
-    <!-- Desktop Header -->
-    <div class="desktopContainer">
-        <div class="logo">
-            {% if section.settings.logo != blank %}
-                <a href="/"><img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo"></a>
-            {% else %}
-                {{ shop.name }}
-            {% endif %}
-        </div>
-        <div class="headerText">{{ section.settings.centerText }}</div>
-        {% if section.settings.buttonText != blank %}
-            <a href="{{ section.settings.buttonLink }}" class="headerButton">
-                {{ section.settings.buttonText }}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
-        {% endif %}
     </div>
 </header>
 
 <script>
     const header = document.querySelector('.customHeader');
-    const menu = header.querySelector('.mobileMenu');
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    function openMenu() {
-        header.classList.add('menu-opened');
-        menu.style.maxHeight = menu.scrollHeight + "px";
-    }
-
-    function closeMenu() {
-        header.classList.remove('menu-opened');
-        menu.style.maxHeight = "0px";
-    }
-
-    openBtn?.addEventListener('click', openMenu);
-    closeBtn?.addEventListener('click', closeMenu);
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 820) {
-            menu.style.maxHeight = "none";
-        } else if (!header.classList.contains('menu-opened')) {
-            menu.style.maxHeight = "0px";
-        }
-    });
-</script>
-
+    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
+    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+</script>>
 
 {% schema %}
     {
