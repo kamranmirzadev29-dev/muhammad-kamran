@@ -254,11 +254,48 @@
             "popupVertical": 10,
             "popupHorizontal": 10
           }
+        },
+        "image_card_6bTHWA": {
+          "type": "imageCard",
+          "settings": {
+            "productImage": "shopify://shop_images/image_824.png",
+            "product": "chequered-red-shirt",
+            "popupVertical": 10,
+            "popupHorizontal": 10
+          }
+        },
+        "image_card_WU8cJx": {
+          "type": "imageCard",
+          "settings": {
+            "product": "",
+            "popupVertical": 10,
+            "popupHorizontal": 10
+          }
+        },
+        "image_card_KNCVUw": {
+          "type": "imageCard",
+          "settings": {
+            "product": "",
+            "popupVertical": 10,
+            "popupHorizontal": 10
+          }
+        },
+        "image_card_FPjLXf": {
+          "type": "imageCard",
+          "settings": {
+            "product": "",
+            "popupVertical": 10,
+            "popupHorizontal": 10
+          }
         }
       },
       "block_order": [
         "image_card_BPwCfU",
-        "image_card_nDW9c4"
+        "image_card_nDW9c4",
+        "image_card_6bTHWA",
+        "image_card_WU8cJx",
+        "image_card_KNCVUw",
+        "image_card_FPjLXf"
       ],
       "name": "Products Hotspot",
       "settings": {
@@ -267,7 +304,7 @@
         "headingSizeTablet": 28,
         "headingSizeMobile": 24,
         "headingMarginBottom": 30,
-        "sectionBackgroundColor": "#FFFFFF",
+        "sectionBackgroundColor": "#ffffff",
         "sectionHeadingTextColor": "#000000",
         "paddingTopDesktop": 90,
         "paddingBottomDesktop": 50,
