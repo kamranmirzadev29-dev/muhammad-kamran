@@ -219,10 +219,25 @@
         "buttonTextColor": "#ffffff",
         "buttonBackgroundColor": "#000000"
       }
+    },
+    "custom_rich_text_nG8V3N": {
+      "type": "customRichText",
+      "name": "Rich Text",
+      "settings": {
+        "textForDesktop": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>",
+        "textForMobile": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>",
+        "sectionBackgroundColor": "#F5F5F5",
+        "sectionTextColor": "#000000",
+        "fontSizeForDesktop": 16,
+        "fontSizeForMobile": 14,
+        "paddingTop": 10,
+        "paddingBottom": 10
+      }
     }
   },
   "order": [
     "product_list_fa6P9H",
-    "custom_image_bannner_hCy3CW"
+    "custom_image_bannner_hCy3CW",
+    "custom_rich_text_nG8V3N"
   ]
 }
