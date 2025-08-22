@@ -111,8 +111,98 @@
 </section>
 
 <script>
-
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.quickView').forEach(button => {
+      button.addEventListener('click', function () {
+        const targetId = this.dataset.modalTarget;
+        document.getElementById(targetId).setAttribute('aria-hidden', 'false');
+      });
+    });
+    document.querySelectorAll('.closeQuickView').forEach(btn => {
+      btn.addEventListener('click', function () {
+        this.closest('.quickViewModal').setAttribute('aria-hidden', 'true');
+      });
+    });
+    document.querySelectorAll('.quick-view-form').forEach(form => {
+      const variantInput = form.querySelector('.variant-id');
+      const swatches = form.querySelectorAll('.swatch');
+      const sizeSelect = form.querySelector('.size-select');
+      const variantsJson = document.getElementById(`variants-${form.dataset.productId}`);
+      if (!variantsJson) return;
+      const variants = JSON.parse(variantsJson.textContent);
+      function getSelectedColor() {
+        const activeSwatch = form.querySelector('.swatch.active');
+        return activeSwatch ? activeSwatch.dataset.color : null;
+      }
+      function getSelectedSize() {
+        return sizeSelect?.value || null;
+      }
+      function updateVariantId() {
+        const color = getSelectedColor();
+        const size = getSelectedSize();
+        const matched = variants.find(v =>
+          v.options.includes(color) &&
+          (!size || v.options.includes(size))
+        );
+        if (matched) {
+          variantInput.value = matched.id;
+        }
+      }
+      swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+          swatches.forEach(s => s.classList.remove('active'));
+          swatch.classList.add('active');
+          updateVariantId();
+        });
+      });
+      if (sizeSelect) {
+        sizeSelect.addEventListener('change', () => {
+          updateVariantId();
+          const selectedIndex = sizeSelect.selectedIndex;
+          const options = sizeSelect.querySelectorAll('option');
+          options.forEach((option, index) => {
+            if (index === selectedIndex && option.value !== "") {
+              option.classList.add('selected');
+            } else {
+              option.classList.remove('selected');
+            }
+          });
+        });
+      }
+      form.addEventListener('submit', function (e) {
+        const selectedColor = getSelectedColor();
+        const selectedSize = getSelectedSize();
+        if (selectedColor === "Black" && selectedSize === "M") {
+          e.preventDefault();
+          const mainVariantId = variantInput.value;
+          const jacketVariantId = window.jacketVariantId;
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: [
+                { id: mainVariantId, quantity: 1 },
+                { id: jacketVariantId, quantity: 1 }
+              ]
+            })
+          })
+          .then(response => {
+            if (!response.ok) throw new Error("Cart add failed");
+            return response.json();
+          })
+          .then(() => {
+            window.location.href = "/cart";
+          })
+          .catch(err => {
+            console.error("Error adding products:", err);
+            alert("There was a problem adding the products to your cart.");
+          });
+        }
+      });
+    });
+  });
 </script>
+
 
 {% schema %}
     {
