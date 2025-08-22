@@ -1,0 +1,33 @@
+{% schema %}
+    {
+        "name": "Products Hotspot",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Section Heading"
+            },
+            {
+                "type": "text",
+                "id": "sectionHeading",
+                "label": "Section Heading",
+                "default": "Tisso vison in the wild"
+            },
+            {
+                "type": "range",
+                "id": "headingSizeDesktop",
+                "label": "Font Size For Desktop",
+                "min": 16,
+                "max": 64,
+                "unit": "px",
+                "default": 16,
+                "step": 2
+            }
+        ],
+        "presets": [
+            {
+                "name": "Products Hotspot",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}
