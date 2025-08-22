@@ -291,7 +291,7 @@
                     <div class="productDetail">
                       <h2 class="productTitle">{{ product.title }}</h2>
                       <p class="productPrice">{{ product.price | money }}</p>
-                      <p class="productDescription">{{ product.description | strip_html }}</p>
+                      <p class="productDescription">{{ product.description | strip_html | truncate: 100 }}</p>
                     </div>
                   </div>
 
