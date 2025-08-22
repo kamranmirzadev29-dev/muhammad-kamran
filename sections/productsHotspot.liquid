@@ -152,8 +152,8 @@
   .productsHotspot-{{ section.id }} .swatches {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-right: -10px;
+    {% comment %} gap: 10px; {% endcomment %}
+    {% comment %} margin-right: -10px; {% endcomment %}
     align-items: center;
     justify-content: center;
   }
@@ -342,14 +342,13 @@
                               {% unless seen_colors contains color %}
                                 {% assign seen_colors = seen_colors | append: color | append: "," %}
                                 {% assign swatch_color = color | downcase %}
-<div
-  class="customSwatch"
-  data-color="{{ color }}"
->
-  <span class="swatchColor" style="background: {{ swatch_color | default: '#000' }}"></span>
-  <span class="swatchLabel">{{ color }}</span>
-</div>
-
+                                  <div
+                                    class="customSwatch"
+                                    data-color="{{ color }}"
+                                  >
+                                    <span class="swatchColor" style="background: {{ swatch_color | default: '#000' }}"></span>
+                                    <span class="swatchLabel">{{ color }}</span>
+                                  </div>
                               {% endunless %}
                             {% endfor %}
                           </div>
