@@ -260,8 +260,8 @@
           "settings": {
             "productImage": "shopify://shop_images/image_824.png",
             "product": "chequered-red-shirt",
-            "popupVertical": 10,
-            "popupHorizontal": 10
+            "popupVertical": 20,
+            "popupHorizontal": 60
           }
         },
         "image_card_WU8cJx": {
