@@ -68,6 +68,20 @@
         font-size: 22px;
         cursor: pointer;
     }
+    @media (max-width: 820px) {
+        .customHeader .subInnerContainer {
+            display: flex;
+            width: 100%;
+        }
+        .customHeader .headerText,
+        .customHeader .headerButton {
+            display: none;
+        }
+        .customHeader.menu-opened .headerText,
+        .customHeader.menu-opened .headerButton {
+            display: block;
+        }
+    }
 </style>
 
 <header class="customHeader">
