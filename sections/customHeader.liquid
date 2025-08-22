@@ -160,11 +160,36 @@
 
 <script>
     const header = document.querySelector('.customHeader');
-    const openBtn = document.getElementById('menu-open');
-    const closeBtn = document.getElementById('menu-close');
+const openBtn = document.getElementById('menu-open');
+const closeBtn = document.getElementById('menu-close');
 
-    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
-    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
+function slideIn() {
+  // Animate from off-screen left to 0
+  header.animate([
+    { transform: 'translateX(-100%)' },
+    { transform: 'translateX(0)' }
+  ], {
+    duration: 300,
+    fill: 'forwards',
+    easing: 'ease-out'
+  });
+}
+
+function slideOut() {
+  // Animate from 0 to off-screen left
+  header.animate([
+    { transform: 'translateX(0)' },
+    { transform: 'translateX(-100%)' }
+  ], {
+    duration: 300,
+    fill: 'forwards',
+    easing: 'ease-in'
+  });
+}
+
+openBtn?.addEventListener('click', () => slideIn());
+closeBtn?.addEventListener('click', () => slideOut());
+
 </script>
 
 {% schema %}
