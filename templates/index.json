@@ -203,9 +203,24 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "custom_image_bannner_hCy3CW": {
+      "type": "customImageBannner",
+      "name": "Image Bannner",
+      "settings": {
+        "heading": "The Gift Guide",
+        "subHeading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "buttonText": "Shop Now",
+        "buttonLink": "",
+        "textAlignmnent": "center",
+        "textColor": "#000000",
+        "buttonTextColor": "#ffffff",
+        "buttonBackgroundColor": "#000000"
+      }
     }
   },
   "order": [
-    "product_list_fa6P9H"
+    "product_list_fa6P9H",
+    "custom_image_bannner_hCy3CW"
   ]
 }
