@@ -1,0 +1,132 @@
+<style>
+    .customHeader-{{ section.id }} {
+        background: {{ section.settings.headerBackgroundColor }};
+        padding-top: {{ section.settings.headerTopPadding }}px;
+        padding-bottom: {{ section.settings.headerBottomPadding }}px;
+    }
+    .customHeader-{{ section.id }} .innerContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+</style>
+
+<header class="customHeader-{{ section.id }}">
+    <div class="custom-container">
+        <div class="innerContainer">
+            <div class="subInnerContainer">
+                <div class="mobileMenuToggle">
+                    <button id="menu-open" class="menuButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                            <path d="M1 6.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 11.5H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button id="menu-close" class="menuButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                            <path d="M1 13.9997L13.7279 1.27177" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1.00031L13.7279 13.7282" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="logo">
+                    {% if section.settings.logo != blank %}
+                        <a href="/" title="Home">
+                            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="Logo">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="headerText">{{ section.settings.centerText }}</div>
+            {% if section.settings.buttonText != blank %}
+                <a href="{{ section.settings.buttonLink }}" class="headerButton">
+                    {{ section.settings.buttonText }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
+                        <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+{% schema %}
+    {
+        "name": "Custom Header",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header Content"
+            },
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "text",
+                "id": "centerText",
+                "label": "Center Text",
+                "default": "Find the ideal gift for your loved ones."
+            },
+            {
+                "type": "text",
+                "id": "buttonText",
+                "label": "Button Text",
+                "default": "choose gift"
+            },
+            {
+                "type": "url",
+                "id": "buttonLink",
+                "label": "Button Link",
+            },
+            {
+                "type": "header",
+                "content": "Colors For Header Content"
+            },
+            {
+                "type": "color",
+                "id": "headerBackgroundColor",
+                "label": "Header Background Color",
+                "default": "#F5F5F5"
+            },
+            {
+                "type": "color",
+                "id": "textColor",
+                "label": "Text Color",
+                "default": "#000000"
+            },
+            {
+                "type": "color",
+                "id": "buttonBackgroundColor",
+                "label": "Button Background Color",
+                "default": "#FFF544"
+            },
+            {
+                "type": "range",
+                "id": "headerTopPadding",
+                "min": 0,
+                "max": 32,
+                "unit": "px",
+                "label": "Header Top Padding",
+                "default": 10
+            },
+            {
+                "type": "range",
+                "id": "headerBottomPadding",
+                "min": 0,
+                "max": 32,
+                "unit": "px",
+                "label": "Header Bottom Padding",
+                "default": 10
+            }
+        ],
+        "presets": [
+            {
+                "name": "Custom Header"
+            }
+        ]
+    }
+{% endschema %}
