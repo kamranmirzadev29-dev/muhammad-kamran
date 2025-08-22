@@ -113,18 +113,6 @@
         .customHeader.menu-opened #menu-close {
             display: inline-block;
         }
-        .customHeader .headerText,
-        .customHeader .headerButton {
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.4s ease;
-        }
-
-        .customHeader.menu-opened .headerText,
-        .customHeader.menu-opened .headerButton {
-            opacity: 1;
-        }
     }
 </style>
 
@@ -173,71 +161,8 @@
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    const headerText = header.querySelector('.headerText');
-    const headerButton = header.querySelector('.headerButton');
-
-    const isMobile = () => window.innerWidth <= 820;
-
-    const setMaxHeight = (el) => {
-        if (el) {
-            el.style.maxHeight = el.scrollHeight + 'px';
-        }
-    };
-
-    const clearMaxHeight = (el) => {
-        if (el) {
-            el.style.maxHeight = '';
-        }
-    };
-
-    const openMenu = () => {
-        if (!isMobile()) return;
-
-        header.classList.add('menu-opened');
-        setMaxHeight(headerText);
-        setMaxHeight(headerButton);
-    };
-
-    const closeMenu = () => {
-        if (!isMobile()) return;
-
-        if (headerText) {
-            headerText.style.maxHeight = headerText.scrollHeight + 'px';
-        }
-        if (headerButton) {
-            headerButton.style.maxHeight = headerButton.scrollHeight + 'px';
-        }
-
-        requestAnimationFrame(() => {
-            header.classList.remove('menu-opened');
-
-            if (headerText) {
-                headerText.style.maxHeight = '0px';
-            }
-            if (headerButton) {
-                headerButton.style.maxHeight = '0px';
-            }
-        });
-    };
-
-    openBtn?.addEventListener('click', openMenu);
-    closeBtn?.addEventListener('click', closeMenu);
-
-    [headerText, headerButton].forEach((el) => {
-        el?.addEventListener('transitionend', () => {
-            if (!header.classList.contains('menu-opened')) {
-                clearMaxHeight(el);
-            }
-        });
-    });
-
-    window.addEventListener('resize', () => {
-        if (!isMobile()) {
-            header.classList.remove('menu-opened');
-            clearMaxHeight(headerText);
-            clearMaxHeight(headerButton);
-        }
-    });
+    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
+    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
 </script>
 
 {% schema %}
