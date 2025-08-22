@@ -1,3 +1,23 @@
+<style>
+    .richText-{{ section.id }} {
+        background: {{ section.settings.sectionBackgroundColor }};
+        padding-top: {{ section.settings.paddingTop }};
+        padding-bottom: {{ section.settings.paddingBottom }};
+    }
+    .richText-{{ section.id }} .text {
+        font-size: {{ section.settings.fontSizeForDesktop }}px;
+        font-weight: 400;
+        color: {{ section.settings.sectionTextColor }};
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: normal;
+        line-height: normal;
+    }
+    .richText-{{ section.id }} .text p {
+        margin: 0;
+    }
+</style>
+
 <section class="richText-{{ section.id }}">
     <div class="customContainer">
         <div class="text small-hide">{{ section.settings.textForDesktop | strip_html }}</div>
