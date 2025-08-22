@@ -1,10 +1,10 @@
 <style>
-    .customHeader-{{ section.id }} {
+    .customHeader {
         background: {{ section.settings.headerBackgroundColor }};
         padding-top: {{ section.settings.headerTopPadding }}px;
         padding-bottom: {{ section.settings.headerBottomPadding }}px;
     }
-    .customHeader-{{ section.id }} .innerContainer {
+    .customHeader .innerContainer {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -12,7 +12,7 @@
     }
 </style>
 
-<header class="customHeader-{{ section.id }}">
+<header class="customHeader}">
     <div class="custom-container">
         <div class="innerContainer">
             <div class="subInnerContainer">
@@ -53,12 +53,12 @@
 </header>
 
 <script>
-    const header = document.qureySelector('.customHeader-{{ section.id }}');
+    const header = document.qureySelector('.customHeader');
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
 
-    openBtn?.addEventListner('click', () => header.classList.add('menu-opened'));
-    closeBtn?.addEventListner('click', () => header.classList.remove('menu-opened'));
+    openBtn?.addEventListener('click', () => header.classList.add('menu-opened'));
+    closeBtn?.addEventListener('click', () => header.classList.remove('menu-opened'));
 </script>
 
 {% schema %}
