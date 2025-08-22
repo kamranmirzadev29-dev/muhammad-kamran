@@ -226,18 +226,52 @@
       "settings": {
         "textForDesktop": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>",
         "textForMobile": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>",
-        "sectionBackgroundColor": "#F5F5F5",
+        "sectionBackgroundColor": "#f5f5f5",
         "sectionTextColor": "#000000",
         "fontSizeForDesktop": 16,
         "fontSizeForMobile": 14,
         "paddingTop": 10,
         "paddingBottom": 10
       }
+    },
+    "products_hotspot_ctgY68": {
+      "type": "productsHotspot",
+      "blocks": {
+        "image_card_BPwCfU": {
+          "type": "imageCard",
+          "settings": {
+            "productImage": "shopify://shop_images/Group_1000008178.png",
+            "product": "black-leather-bag",
+            "popupVertical": 10,
+            "popupHorizontal": 10
+          }
+        }
+      },
+      "block_order": [
+        "image_card_BPwCfU"
+      ],
+      "name": "Products Hotspot",
+      "settings": {
+        "sectionHeading": "Tisso vison in the wild",
+        "headingSizeDesktop": 36,
+        "headingSizeTablet": 28,
+        "headingSizeMobile": 24,
+        "headingMarginBottom": 30,
+        "sectionBackgroundColor": "#FFFFFF",
+        "sectionHeadingTextColor": "#000000",
+        "paddingTopDesktop": 90,
+        "paddingBottomDesktop": 50,
+        "paddingTopTablet": 60,
+        "paddingBottomTablet": 40,
+        "paddingTopMobile": 40,
+        "paddingBottomMobile": 24
+      }
     }
   },
   "order": [
     "product_list_fa6P9H",
     "custom_image_bannner_hCy3CW",
-    "custom_rich_text_nG8V3N"
+    "custom_rich_text_nG8V3N",
+    "products_hotspot_ctgY68"
   ]
 }
