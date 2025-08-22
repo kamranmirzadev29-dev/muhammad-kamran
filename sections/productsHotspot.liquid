@@ -7,7 +7,7 @@
         <div class="sectionHeading">{{ section.settings.sectionHeading }}</div>
         <div class="gridContainer">
             {% for block in section.blocks %}
-                {% assign product = section.settings.product %}
+                {% assign product = block.settings.product %}
                 {% if product %}
                     <div class="blockCard">
                         {% if block.settings.image %}
