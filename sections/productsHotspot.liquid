@@ -133,6 +133,48 @@
                 "step": 2
             },
         ],
+        "blocks": [
+            {
+                "type": "imageCard",
+                "name": "Product Card",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "productImage",
+                        "label": "Product Image"
+                    },
+                    {
+                        "type": "product",
+                        "id": "product",
+                        "label": "Select Your Product"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Position Adjustment Of Popup Button"
+                    },
+                    {
+                        "type": "range",
+                        "id": "popupVertical",
+                        "min": 0,
+                        "max": 100,
+                        "unit": "%",
+                        "step": 1,
+                        "default": 10,
+                        "label": "Vertical Position (%)"
+                    },
+                    {
+                        "type": "range",
+                        "id": "popupHorizontal",
+                        "min": 0,
+                        "max": 100,
+                        "unit": "%",
+                        "step": 1,
+                        "default": 10,
+                        "label": "Horizontal Position (%)"
+                    },
+                ]
+            }
+        ],
         "presets": [
             {
                 "name": "Products Hotspot",
