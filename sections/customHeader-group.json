@@ -12,7 +12,7 @@
   "type": "header",
   "sections": {
     "customHeader": {
-      "type":"Header",
+      "type":"customHeader",
       "settings": {
 
       }
