@@ -264,6 +264,48 @@
     cursor: pointer;
     font-size: 18px;
   }
+  .productsHotspot-{{ section.id }} .swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.productsHotspot-{{ section.id }} .customSwatch {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #000;
+  padding: 10px 14px;
+  cursor: pointer;
+  min-width: 130px;
+  transition: all 0.3s ease;
+}
+
+.productsHotspot-{{ section.id }} .customSwatch .swatchColor {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 1px solid #000; /* keeps white color visible */
+}
+
+.productsHotspot-{{ section.id }} .customSwatch .swatchLabel {
+  font-size: 14px;
+  color: #000;
+}
+
+.productsHotspot-{{ section.id }} .customSwatch.active {
+  background: #000;
+  color: #fff;
+}
+
+.productsHotspot-{{ section.id }} .customSwatch.active .swatchLabel {
+  color: #fff;
+}
+
+.productsHotspot-{{ section.id }} .customSwatch.active .swatchColor {
+  border-color: #fff;
+}
+
 </style>
 
 <section class="productsHotspot-{{ section.id }}">
