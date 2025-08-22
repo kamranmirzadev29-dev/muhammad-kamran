@@ -176,40 +176,49 @@
     const headerText = header.querySelector('.headerText');
     const headerButton = header.querySelector('.headerButton');
 
-    function isMobile() {
-        return window.innerWidth <= 820;
-    }
+    const isMobile = () => window.innerWidth <= 820;
 
-    function openMenu() {
+    const setMaxHeight = (el) => {
+        if (el) {
+            el.style.maxHeight = el.scrollHeight + 'px';
+        }
+    };
+
+    const clearMaxHeight = (el) => {
+        if (el) {
+            el.style.maxHeight = '';
+        }
+    };
+
+    const openMenu = () => {
         if (!isMobile()) return;
 
         header.classList.add('menu-opened');
+        setMaxHeight(headerText);
+        setMaxHeight(headerButton);
+    };
 
-        if (headerText) {
-            headerText.style.maxHeight = headerText.scrollHeight + 'px';
-        }
-        if (headerButton) {
-            headerButton.style.maxHeight = headerButton.scrollHeight + 'px';
-        }
-    }
-
-    function closeMenu() {
+    const closeMenu = () => {
         if (!isMobile()) return;
 
         if (headerText) {
             headerText.style.maxHeight = headerText.scrollHeight + 'px';
-            void headerText.offsetHeight; // force reflow
-            headerText.style.maxHeight = '0px';
         }
-
         if (headerButton) {
             headerButton.style.maxHeight = headerButton.scrollHeight + 'px';
-            void headerButton.offsetHeight;
-            headerButton.style.maxHeight = '0px';
         }
 
-        header.classList.remove('menu-opened');
-    }
+        requestAnimationFrame(() => {
+            header.classList.remove('menu-opened');
+
+            if (headerText) {
+                headerText.style.maxHeight = '0px';
+            }
+            if (headerButton) {
+                headerButton.style.maxHeight = '0px';
+            }
+        });
+    };
 
     openBtn?.addEventListener('click', openMenu);
     closeBtn?.addEventListener('click', closeMenu);
@@ -217,8 +226,7 @@
     [headerText, headerButton].forEach((el) => {
         el?.addEventListener('transitionend', () => {
             if (!header.classList.contains('menu-opened')) {
-                el.style.maxHeight = '';
-                el.style.opacity = '';
+                clearMaxHeight(el);
             }
         });
     });
@@ -226,8 +234,8 @@
     window.addEventListener('resize', () => {
         if (!isMobile()) {
             header.classList.remove('menu-opened');
-            if (headerText) headerText.style.maxHeight = '';
-            if (headerButton) headerButton.style.maxHeight = '';
+            clearMaxHeight(headerText);
+            clearMaxHeight(headerButton);
         }
     });
 </script>
