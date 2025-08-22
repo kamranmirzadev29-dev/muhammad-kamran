@@ -287,8 +287,8 @@
           "settings": {
             "productImage": "shopify://shop_images/image_827.png",
             "product": "dark-denim-top",
-            "popupVertical": 10,
-            "popupHorizontal": 10
+            "popupVertical": 40,
+            "popupHorizontal": 80
           }
         }
       },
