@@ -242,7 +242,7 @@
           "type": "imageCard",
           "settings": {
             "productImage": "shopify://shop_images/image_822.png",
-            "product": "",
+            "product": "black-leather-bag",
             "popupVertical": 60,
             "popupHorizontal": 60
           }
