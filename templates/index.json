@@ -242,8 +242,8 @@
           "settings": {
             "productImage": "shopify://shop_images/Group_1000008178.png",
             "product": "black-leather-bag",
-            "popupVertical": 10,
-            "popupHorizontal": 10
+            "popupVertical": 55,
+            "popupHorizontal": 55
           }
         },
         "image_card_nDW9c4": {
