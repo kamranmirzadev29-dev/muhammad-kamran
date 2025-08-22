@@ -166,7 +166,7 @@
     border: 1px solid #000000;
     {% comment %} box-shadow: -7px 0 0 0 var(--swatch-color, #000); {% endcomment %}
     cursor: pointer;
-    min-width: 130px;
+    min-width: 140px;
     box-sizing: border-box;
     transition: all 0.2s ease;
     line-height: 1;
@@ -264,21 +264,16 @@
     cursor: pointer;
     font-size: 18px;
   }
-  .productsHotspot-{{ section.id }} .swatches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
 
-.productsHotspot-{{ section.id }} .customSwatch {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border: 1px solid #000;
-  padding: 0;
-  height: 40px;
-  cursor: pointer;
-}
+  .productsHotspot-{{ section.id }} .customSwatch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #000;
+    padding: 0;
+    height: 40px;
+    cursor: pointer;
+  }
 
 .productsHotspot-{{ section.id }} .customSwatch .swatchColor {
     width: 5px;
@@ -286,24 +281,6 @@
     margin-right: 10px;
     border: 1px solid #000;
     border-left: 0;
-}
-
-.productsHotspot-{{ section.id }} .customSwatch .swatchLabel {
-  font-size: 14px;
-  color: #000;
-}
-
-.productsHotspot-{{ section.id }} .customSwatch.active {
-  background: #000;
-  color: #fff;
-}
-
-.productsHotspot-{{ section.id }} .customSwatch.active .swatchLabel {
-  color: #fff;
-}
-
-.productsHotspot-{{ section.id }} .customSwatch.active .swatchColor {
-  border-color: #fff;
 }
 
 </style>
