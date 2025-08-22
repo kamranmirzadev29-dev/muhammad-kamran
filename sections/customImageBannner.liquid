@@ -46,22 +46,25 @@
         text-align: right;
     }
     .imageBanner-{{ section.id }} .bannerButton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        padding: 1.5rem 1.5rem;
         background: linear-gradient(to left, {{ section.settings.buttonBackgroundColor }} 50%, #FFF544 50%);
         background-size: 200% 100%;
         background-position: right bottom;
-        color: {{ section.settings.buttonTextColor }};
+        padding: 11px;
         text-decoration: none;
         font-size: 16px;
         font-weight: 400;
-        max-width: 220px;
-        width: 100%;
         text-transform: uppercase;
+        color: {{ section.settings.textColor }};
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        max-width: 200px;
+        width: 100%;
+        line-height: normal;
+        margin: 0;
         transition: background-position 0.3s ease, color 0.3s ease;
+    }
     }
     .imageBanner-{{ section.id }} .bannerButton:hover {
         background-position: left bottom;
