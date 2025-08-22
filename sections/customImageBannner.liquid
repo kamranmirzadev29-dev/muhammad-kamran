@@ -172,6 +172,29 @@
     </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function adjustBannerPadding() {
+            var windowWidth = window.innerWidth;
+            if (windowWidth > 768) {
+                var container = document.querySelector('.customContainer');
+                var bannerText = document.querySelector('.bannerText');
+
+                if (container && bannerText) {
+                    var offset = conatiner.getBoundingClientRect().left + window.scrollX;
+                    bannerText.style.paddingLeft = offset + 'px';
+                }
+            }
+        }
+
+        adjustBannerPadding();
+
+        window.addEventListener('resize', function () {
+            adjustBannerPadding();
+        });
+    });
+</script>
+
 {% schema %}
     {
         "name": "Image Bannner",
