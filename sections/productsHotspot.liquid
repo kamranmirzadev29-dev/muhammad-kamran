@@ -1,0 +1,695 @@
+<style>
+  .productsHotspot-{{ section.id }} {
+    background-color: {{ section.settings.sectionBackgroundColor }};
+  }
+  .productsHotspot-{{ section.id }} .sectionHeading {
+    margin-bottom: {{ section.settings.headingMarginBottom }}px;
+    color: {{ section.settings.sectionHeadingTextColor }};
+    font-weight: 400;
+  }
+  @media (min-width: 1025px) {
+    .productsHotspot-{{ section.id }} {
+      padding-top: {{ section.settings.paddingTopDesktop }}px;
+      padding-bottom: {{ section.settings.paddingBottomDesktop }}px;
+    }
+    .productsHotspot-{{ section.id }} .sectionHeading {
+      font-size: {{ section.settings.headingSizeDesktop }}px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .productsHotspot-{{ section.id }} {
+      padding-top: {{ section.settings.paddingTopTablet }}px;
+      padding-bottom: {{ section.settings.paddingBottomTablet }}px;
+    }
+    .productsHotspot-{{ section.id }} .sectionHeading {
+      font-size: {{ section.settings.headingSizeTablet }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .productsHotspot-{{ section.id }} {
+      padding-top: {{ section.settings.paddingTopMobile }}px;
+      padding-bottom: {{ section.settings.paddingBottomMobile }}px;
+    }
+    .productsHotspot-{{ section.id }} .sectionHeading {
+      font-size: {{ section.settings.headingSizeMobile }}px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .productsHotspot-{{ section.id }} .gridContainer {
+      gap: 4px;
+    }
+    .productsHotspot-{{ section.id }} .blockCard .quickView {
+      top: 10% !important;
+      left: 60% !important;
+      transform: translate(-60%, -10%) !important;
+    }
+  }
+  .productsHotspot-{{ section.id }} .gridContainer {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    .productsHotspot-{{ section.id }} .gridContainer {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  .productsHotspot-{{ section.id }} .blockCard {
+    position: relative;
+    display: flex;
+  }
+  .productsHotspot-{{ section.id }} .blockCard img {
+    max-width: 100%;
+  }
+  .productsHotspot-{{ section.id }} .quickView {
+    position: absolute;
+    background: white;
+    border: 0;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 50%;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .productsHotspot-{{ section.id }} .quickViewModal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+  }
+  .productsHotspot-{{ section.id }} .quickViewModal[aria-hidden="false"] {
+    display: flex;
+  }
+  .productsHotspot-{{ section.id }} .modalContent {
+    background: #fff;
+    padding: 25px 20px;
+    width: 100%;
+    max-width: 310px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  .modalGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .productsHotspot-{{ section.id }} .modalContent .productDetails .modalImage {
+    width: 100%;
+    max-width: 120px;
+    height: 140px;
+    object-fit: cover;
+  }
+  .productsHotspot-{{ section.id }} .modalDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .productsHotspot-{{ section.id }} .productDetails {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 5px;
+  }
+  .productsHotspot-{{ section.id }} .productTitle {
+    font-size: 16px;
+    color: #000000;
+    font-weight: 300;
+    margin: 5px 0 10px;
+    line-height: 1;
+  }
+  .productsHotspot-{{ section.id }} .productPrice {
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    margin: 0 0 10px;
+    line-height: 1;
+    font-family: "Lustria", sans-serif;
+  }
+  .productsHotspot-{{ section.id }} .productDescription {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 300;
+    line-height: 1;
+    margin: 0px;
+  }
+  .productsHotspot-{{ section.id }} .variants {
+    margin-top: 11.5px;
+  }
+  .productsHotspot-{{ section.id }} .option-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    margin: 11px 0 6px;
+    line-height: 1;
+  }
+  .productsHotspot-{{ section.id }} .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    {% comment %} gap: 10px; {% endcomment %}
+    {% comment %} margin-right: -10px; {% endcomment %}
+    align-items: center;
+    justify-content: center;
+  }
+  .productsHotspot-{{ section.id }} .swatches .customSwatch {
+    {% comment %} padding: 11px 13px; {% endcomment %}
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    background: white;
+    border: 1px solid #000000;
+    {% comment %} box-shadow: -7px 0 0 0 var(--swatch-color, #000); {% endcomment %}
+    cursor: pointer;
+    min-width: 135px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    line-height: 1;
+  }
+  .productsHotspot-{{ section.id }} .swatches .customSwatch:first-child {
+    border-right: 0;
+  }
+  .productsHotspot-{{ section.id }} .customSwatch.active {
+    background: black;
+    color: white;
+  }
+  .productsHotspot-{{ section.id }} .custom-select-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  .productsHotspot-{{ section.id }} .size-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    font-size: 14px;
+    color: #000;
+    border: 1px solid #000000;
+    border-radius: 0;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  .productsHotspot-{{ section.id }} .custom-select-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 55px;
+    width: 1px;
+    height: 100%;
+    background-color: #000000;
+    z-index: 2;
+  }
+  .productsHotspot-{{ section.id }} .custom-select-wrapper::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'%3E%3Cpath d='M2 2L8 8L14 2' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .productsHotspot-{{ section.id }} .size-select:focus {
+    outline: none;
+  }
+  .productsHotspot-{{ section.id }} .size-select:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+  .productsHotspot-{{ section.id }} .size-select option {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .productsHotspot-{{ section.id }} .add-to-cart-btn {
+    background: linear-gradient(to left, black 50%, #FFF544 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: white;
+    padding: 14px 24px 14px 14px;
+    width: 100%;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 28px;
+    border: none;
+    margin-top: 38px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-position 0.3s ease, color 0.3s ease;
+  }
+  .productsHotspot-{{ section.id }} .add-to-cart-btn:hover {
+    background-position: left bottom;
+    color: black;
+  }
+  .productsHotspot-{{ section.id }} .add-to-cart-btn svg path {
+    transition: fill 0.3s ease;
+  }
+  .productsHotspot-{{ section.id }} .add-to-cart-btn:hover svg path {
+    fill: black;
+  }
+  .productsHotspot-{{ section.id }} .closeQuickView {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .productsHotspot-{{ section.id }} .customSwatch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #000;
+    padding: 0;
+    height: 40px;
+    cursor: pointer;
+  }
+
+.productsHotspot-{{ section.id }} .customSwatch .swatchColor {
+    width: 5px;
+    height: 40px;
+    margin-right: 10px;
+    border: 1px solid #000;
+    border-left: 0;
+}
+
+</style>
+
+<section class="productsHotspot-{{ section.id }}">
+  <div class="customContainer">
+    <div class="sectionHeading">{{ section.settings.sectionHeading }}</div>
+    <div class="gridContainer">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        {% if product %}
+          <div class="blockCard">
+            {% if block.settings.productImage %}
+              <img src="{{ block.settings.productImage | image_url: width: 600 }}" alt="{{ product.title }}" />
+              <button class="quickView" data-modal-target="quick-view-{{ product.handle }}" style="top: {{ block.settings.popupVertical }}%; left: {{ block.settings.popupHorizontal }}%; transform: translate(-{{ block.settings.popupHorizontal }}%, -{{ block.settings.popupVertical }}%)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <path d="M5.3457 1.04175V9.50329" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                  <path d="M1.11523 5.27246H9.57677" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            {% endif %}
+            <div class="quickViewModal" id="quick-view-{{ product.handle }}" aria-hidden="true">
+              <div class="modalContent">
+                <svg class="closeQuickView" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M5.0376 4.94354L13.5229 13.4288" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                  <path d="M5.0376 13.4285L13.5229 4.94325" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                </svg>
+
+                <div class="modalGrid">
+                  <div class="productDetails">
+                    <img class="modalImage" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+                    <div class="productDetail">
+                      <p class="productTitle">{{ product.title }}</p>
+                      <h2 class="productPrice">{{ product.price | money }}</h2>
+                      <p class="productDescription">{{ product.description | strip_html | truncate: 100 }}</p>
+                    </div>
+                  </div>
+
+                  <div class="modalDetails">
+                    {% assign color_index = -1 %}
+                    {% assign size_index = -1 %}
+                    {% for option in product.options_with_values %}
+                      {% if option.name == "Color" %}
+                        {% assign color_index = forloop.index0 %}
+                      {% elsif option.name == "Size" %}
+                        {% assign size_index = forloop.index0 %}
+                      {% endif %}
+                    {% endfor %}
+                    <form method="post" action="/cart/add" class="quick-view-form" data-product-id="{{ product.id }}">
+                      <input type="hidden" name="form_type" value="product" />
+                      <input type="hidden" name="id" class="variant-id" value="{{ product.variants.first.id }}" />
+                      <div class="color_swatches">
+                        {% if color_index != -1 %}
+                          <div class="option-label">Color</div>
+                          <div class="swatches">
+                            {% assign seen_colors = "" %}
+                            {% for variant in product.variants %}
+                              {% assign color = variant.options[color_index] %}
+                              {% unless seen_colors contains color %}
+                                {% assign seen_colors = seen_colors | append: color | append: "," %}
+                                {% assign swatch_color = color | downcase %}
+                                  <div
+                                    class="customSwatch"
+                                    data-color="{{ color }}"
+                                  >
+                                    <span class="swatchColor" style="background: {{ swatch_color | default: '#000' }}"></span>
+                                    <span class="swatchLabel">{{ color }}</span>
+                                  </div>
+                              {% endunless %}
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="variants">
+                        {% if size_index != -1 %}
+                          <div class="option-label">Size</div>
+                          <div class="custom-select-wrapper">
+                            <select class="size-select">
+                              <option value="">Choose your size</option>
+                              {% assign seen_sizes = "" %}
+                              {% for variant in product.variants %}
+                                {% assign size = variant.options[size_index] %}
+                                {% unless seen_sizes contains size %}
+                                  {% assign seen_sizes = seen_sizes | append: size | append: "," %}
+                                  <option value="{{ size }}">{{ size }}</option>
+                                {% endunless %}
+                              {% endfor %}
+                            </select>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <script type="application/json" id="variants-{{ product.id }}">
+                        {{ product.variants | json }}
+                      </script>
+                      <button type="submit" class="add-to-cart-btn">
+                        ADD TO CART
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="12" viewBox="0 0 36 12" fill="none">
+                          <path d="M1.4093 5.25L0.659302 5.25L0.659302 6.75L1.4093 6.75L1.4093 5.25ZM35.6391 6.53033C35.932 6.23744 35.932 5.76257 35.6391 5.46967L30.8661 0.696701C30.5733 0.403808 30.0984 0.403808 29.8055 0.696701C29.5126 0.989594 29.5126 1.46447 29.8055 1.75736L34.0481 6L29.8055 10.2426C29.5126 10.5355 29.5126 11.0104 29.8055 11.3033C30.0984 11.5962 30.5732 11.5962 30.8661 11.3033L35.6391 6.53033ZM1.4093 6.75L35.1088 6.75L35.1088 5.25L1.4093 5.25L1.4093 6.75Z" fill="white"/>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% comment %}Get all products and get specific product "Dark winter jacket"{% endcomment %}
+{%- assign jacket_product = all_products['dark-winter-jacket'] -%}
+<script>
+  window.jacketVariantId = {{ jacket_product.variants.first.id }};
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    //To show quickview popup modal on clicking on quick view button
+    document.querySelectorAll('.quickView').forEach(button => {
+      button.addEventListener('click', function () {
+        const targetId = this.dataset.modalTarget;
+        document.getElementById(targetId).setAttribute('aria-hidden', 'false');
+      });
+    });
+    
+    //To close quickview popup modal on clicking on close quick view button
+    document.querySelectorAll('.closeQuickView').forEach(btn => {
+      btn.addEventListener('click', function () {
+        this.closest('.quickViewModal').setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    //Getting all product information by form like variant-id, get swatches, size variant
+    document.querySelectorAll('.quick-view-form').forEach(form => {
+      const variantInput = form.querySelector('.variant-id');
+      const swatches = form.querySelectorAll('.customSwatch');
+      const sizeSelect = form.querySelector('.size-select');
+      const variantsJson = document.getElementById(`variants-${form.dataset.productId}`);
+      if (!variantsJson) return;
+      const variants = JSON.parse(variantsJson.textContent);
+
+      //To add active class in swatch
+      function getSelectedColor() {
+        const activeSwatch = form.querySelector('.customSwatch.active');
+        return activeSwatch ? activeSwatch.dataset.color : null;
+      }
+
+      function getSelectedSize() {
+        return sizeSelect?.value || null;
+      }
+
+      //Selected variant combination and there matches id
+      function updateVariantId() {
+        const color = getSelectedColor();
+        const size = getSelectedSize();
+        const matched = variants.find(v =>
+          v.options.includes(color) &&
+          (!size || v.options.includes(size))
+        );
+        if (matched) {
+          variantInput.value = matched.id;
+        }
+      }
+
+      //To add/remove active class in swatches
+      swatches.forEach(customSwatch => {
+        customSwatch.addEventListener('click', () => {
+          swatches.forEach(s => s.classList.remove('active'));
+          customSwatch.classList.add('active');
+          updateVariantId();
+        });
+      });
+
+      //To add/remove selected class in variant size
+      if (sizeSelect) {
+        sizeSelect.addEventListener('change', () => {
+          updateVariantId();
+          const selectedIndex = sizeSelect.selectedIndex;
+          const options = sizeSelect.querySelectorAll('option');
+          options.forEach((option, index) => {
+            if (index === selectedIndex && option.value !== "") {
+              option.classList.add('selected');
+            } else {
+              option.classList.remove('selected');
+            }
+          });
+        });
+      }
+
+      //To add required product when variant combination (Black & M) Matches
+      form.addEventListener('submit', function (e) {
+        const selectedColor = getSelectedColor();
+        const selectedSize = getSelectedSize();
+        if (selectedColor === "Black" && selectedSize === "M") {
+          e.preventDefault();
+          const mainVariantId = variantInput.value;
+          const jacketVariantId = window.jacketVariantId;
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: [
+                { id: mainVariantId, quantity: 1 },
+                { id: jacketVariantId, quantity: 1 }
+              ]
+            })
+          })
+          .then(() => {
+            window.location.href = "/cart";
+          })
+          .catch(err => {
+            console.error("Error adding products:", err);
+            alert("There was a problem adding the products to your cart.");
+          });
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+    {
+        "name": "Products Hotspot",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Section Heading"
+            },
+            {
+                "type": "text",
+                "id": "sectionHeading",
+                "label": "Section Heading",
+                "default": "Tisso vison in the wild"
+            },
+            {
+                "type": "range",
+                "id": "headingSizeDesktop",
+                "label": "Font Size For Desktop",
+                "min": 16,
+                "max": 64,
+                "unit": "px",
+                "default": 36,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "headingSizeTablet",
+                "label": "Font Size For Tablet",
+                "min": 16,
+                "max": 64,
+                "unit": "px",
+                "default": 28,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "headingSizeMobile",
+                "label": "Font Size For Mobile",
+                "min": 16,
+                "max": 64,
+                "unit": "px",
+                "default": 24,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "headingMarginBottom",
+                "label": "Heading Margin Bottom",
+                "min": 16,
+                "max": 64,
+                "unit": "px",
+                "default": 30,
+                "step": 2
+            },
+            {
+                "type": "header",
+                "content": "Section Color"
+            },
+            {
+                "type": "color",
+                "id": "sectionBackgroundColor",
+                "label": "Section Background Color",
+                "default": "#FFFFFF"
+            },
+            {
+                "type": "color",
+                "id": "sectionHeadingTextColor",
+                "label": "Section Heading Text Color",
+                "default": "#000000"
+            },
+            {
+                "type": "header",
+                "content": "Section Top/Bottom Padding"
+            },
+            {
+                "type": "range",
+                "id": "paddingTopDesktop",
+                "label": "Padding Top For Desktop",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 90,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "paddingBottomDesktop",
+                "label": "Padding Bottom For Desktop",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 50,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "paddingTopTablet",
+                "label": "Padding Top For Tablet",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 60,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "paddingBottomTablet",
+                "label": "Padding Bottom For Tablet",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 40,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "paddingTopMobile",
+                "label": "Padding Top For Mobile",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 40,
+                "step": 2
+            },
+            {
+                "type": "range",
+                "id": "paddingBottomMobile",
+                "label": "Padding Bottom For Mobile",
+                "min": 16,
+                "max": 100,
+                "unit": "px",
+                "default": 24,
+                "step": 2
+            },
+        ],
+        "blocks": [
+            {
+                "type": "imageCard",
+                "name": "Product Card",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "productImage",
+                        "label": "Product Image"
+                    },
+                    {
+                        "type": "product",
+                        "id": "product",
+                        "label": "Select Your Product"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Position Adjustment Of Popup Button"
+                    },
+                    {
+                        "type": "range",
+                        "id": "popupVertical",
+                        "min": 0,
+                        "max": 100,
+                        "unit": "%",
+                        "step": 1,
+                        "default": 10,
+                        "label": "Vertical Position (%)"
+                    },
+                    {
+                        "type": "range",
+                        "id": "popupHorizontal",
+                        "min": 0,
+                        "max": 100,
+                        "unit": "%",
+                        "step": 1,
+                        "default": 10,
+                        "label": "Horizontal Position (%)"
+                    },
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Products Hotspot",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}

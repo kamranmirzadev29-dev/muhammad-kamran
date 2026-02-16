@@ -1,0 +1,294 @@
+<style>
+    .imageBanner-{{ section.id }} {
+        position: relative;
+        text-align: center;
+        padding: 0;
+    }
+    .imageBanner-{{ section.id }} .bannerContent {
+        position: relative;
+    }
+    .imageBanner-{{ section.id }}.bannerImage {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .imageBanner-{{ section.id }} .bannerImage.imageText {
+        width: 60%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .imageBanner-{{ section.id }} .bannerText {
+        padding: 2rem 0rem 0rem;
+        max-width: 40%;
+        color: {{ section.settings.textColor }};
+    }
+    .imageBanner-{{ section.id }} .heading {
+        font-size: 70px;
+        font-weight: 700;
+        color: {{ section.settings.textColor }};
+        margin: 0 0 50px;
+    }
+    .imageBanner-{{ section.id }} .description {
+        font-size: 20px;
+        font-weight: 400;
+        color: {{ section.settings.textColor }};
+        margin: 0 0 50px;
+        line-height: normal;
+    }
+    .imageBanner-{{ section.id }} .text-left {
+        text-align: left;
+    }
+    .imageBanner-{{ section.id }} .text-center {
+        text-align: center;
+    }
+    .imageBanner-{{ section.id }} .text-right {
+        text-align: right;
+    }
+    .imageBanner-{{ section.id }} .bannerButton {
+        background: linear-gradient(to left, {{ section.settings.buttonBackgroundColor }} 50%, #FFF544 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        padding: 14.5px 11px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: {{ section.settings.buttonTextColor }};
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        max-width: 200px;
+        width: 100%;
+        line-height: normal;
+        margin: 0;
+        transition: background-position 0.3s ease, color 0.3s ease;
+    }
+    .imageBanner-{{ section.id }} .bannerButton:hover {
+        background-position: left bottom;
+        color: black;
+    }
+    .imageBanner-{{ section.id }} .bannerButton svg path {
+        transition: fill 0.3s ease;
+    }
+    .imageBanner-{{ section.id }} .bannerButton:hover svg path {
+        fill: black;
+    }
+    .imageBanner-{{ section.id }} .imageWithText {
+        display: flex;
+        align-items: flex-start;
+    }
+    @media screen and (min-width: 1199px) and (max-width: 1439px) {
+        .imageBanner-{{ section.id }} .bannerText {
+            padding-top: 1rem;
+            max-width: 50%;
+        }
+        .imageBanner-{{ section.id }} .bannerImage.imageText {
+            max-width: 50%;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .heading {
+            margin-bottom: 20px;
+            font-size: 48px;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .description {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    }
+    @media (max-width: 1199px) {
+        .imageBanner-{{ section.id }} .bannerContent {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        .imageBanner-{{ section.id }} .bannerContent .bannerText {
+            text-align: center;
+            position: relative !important;
+            left: 0 !important;
+            top: 0;
+            width: 100%;
+            max-width: 100%;
+            padding: 5.5rem !important;
+        }
+        .imageBanner-{{ section.id }} .heading {
+            font-size: 36px;
+        }
+        .imageBanner-{{ section.id }} .mobileImageAndButton {
+            position: relative;
+        }
+        .imageBanner-{{ section.id }} .bannerButton.mobile {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -80%);
+        }
+    }
+    @media (max-width: 750px) {
+        .imageBanner-{{ section.id }} .bannerContent .bannerText {
+            padding: 12px !important;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .heading {
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+        .imageBanner-{{ section.id }} .imageWithText .description {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<section class="imageBanner-{{ section.id }}">
+    <div class="bannerContent">
+        {% if section.settings.desktopImage != blank %}
+            <img src="{{ section.settings.desktopImage | image_url }}" alt="{{ section.settings.heading }}" class="bannerImage small-hide medium-hide">
+        {% endif %}
+        <div class="mobileImageAndButton">
+            {% if section.settings.mobileImage != blank %}
+                <img src="{{ section.settings.mobileImage | image_url }}" alt="{{ section.settings.heading }}" class="bannerImage large-up-hide">
+            {% endif %}
+            {% if section.settings.buttonText != blank %}
+                <a href="{{ section.settings.buttonLink }}" class="bannerButton mobile large-up-hide">
+                    {{ section.settings.buttonText }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="13" viewBox="0 0 28 13" fill="none">
+                        <path d="M1.11108 5.74402L0.361084 5.74402L0.361084 7.24402L1.11108 7.24402L1.11108 5.74402ZM27.1487 7.02435C27.4416 6.73146 27.4416 6.25658 27.1487 5.96369L22.3757 1.19072C22.0828 0.897826 21.6079 0.897826 21.315 1.19072C21.0221 1.48361 21.0221 1.95849 21.315 2.25138L25.5577 6.49402L21.315 10.7367C21.0221 11.0296 21.0221 11.5044 21.315 11.7973C21.6079 12.0902 22.0828 12.0902 22.3757 11.7973L27.1487 7.02435ZM1.11108 7.24402L26.6183 7.24402L26.6183 5.74402L1.11108 5.74402L1.11108 7.24402Z" fill="white"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+        <div class="imageWithText">
+            <div class="bannerText text-{{ section.settings.textAlignmnent }}">
+                <h2 class="heading">{{ section.settings.heading }}</h2>
+                <p class="description large-up-hide">{{ section.settings.subHeadingMobile }}</p>
+                <p class="description small-hide medium-hide">{{ section.settings.subHeading }}</p>
+                {% if section.settings.buttonText != blank %}
+                    <a href="{{ section.settings.buttonLink }}" class="bannerButton small-hide medium-hide">
+                        {{ section.settings.buttonText }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="13" viewBox="0 0 28 13" fill="none">
+                            <path d="M1.11108 5.74402L0.361084 5.74402L0.361084 7.24402L1.11108 7.24402L1.11108 5.74402ZM27.1487 7.02435C27.4416 6.73146 27.4416 6.25658 27.1487 5.96369L22.3757 1.19072C22.0828 0.897826 21.6079 0.897826 21.315 1.19072C21.0221 1.48361 21.0221 1.95849 21.315 2.25138L25.5577 6.49402L21.315 10.7367C21.0221 11.0296 21.0221 11.5044 21.315 11.7973C21.6079 12.0902 22.0828 12.0902 22.3757 11.7973L27.1487 7.02435ZM1.11108 7.24402L26.6183 7.24402L26.6183 5.74402L1.11108 5.74402L1.11108 7.24402Z" fill="white"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+            {% if section.settings.mobileImage != blank %}
+                <img src="{{ section.settings.mobileImage | image_url }}" alt="{{ section.settings.heading }}" class="bannerImage imageText small-hide medium-hide">
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function adjustBannerPadding() {
+            var windowWidth = window.innerWidth;
+            if (windowWidth > 768) {
+                var container = document.querySelector('.customContainer');
+                var bannerText = document.querySelector('.bannerText');
+
+                if (container && bannerText) {
+                    var offset = container.getBoundingClientRect().left + window.scrollX;
+                    bannerText.style.paddingLeft = offset + 'px';
+                }
+            } else {
+                // Reset padding on small screens
+                var bannerText = document.querySelector('.bannerText');
+                if (bannerText) {
+                    bannerText.style.paddingLeft = '';
+                }
+            }
+        }
+
+        adjustBannerPadding();
+
+        window.addEventListener('resize', adjustBannerPadding);
+    });
+</script>
+
+{% schema %}
+    {
+        "name": "Image Bannner",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Image Banner Content"
+            },
+            {
+                "type": "image_picker",
+                "id": "desktopImage",
+                "label": "Desktop Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "mobileImage",
+                "label": "Mobile Image"
+            },
+            {
+                "type": "text",
+                "id": "heading",
+                "label": "Heading",
+                "default": "The Gift Guide"
+            },
+            {
+                "type": "textarea",
+                "id": "subHeading",
+                "label": "Sub Heading",
+                "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+            },
+            {
+                "type": "textarea",
+                "id": "subHeadingMobile",
+                "label": "Sub Heading",
+                "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+            },
+            {
+                "type": "text",
+                "id": "buttonText",
+                "label": "Button Text",
+                "default": "Shop Now"
+            },
+            {
+                "type": "url",
+                "id": "buttonLink",
+                "label": "Button Link"
+            },
+            {
+                "type": "select",
+                "id": "textAlignmnent",
+                "label": "Text Alignment",
+                "options": [
+                    { "value": "left", "label": "Left" },
+                    { "value": "center", "label": "Center" },
+                    { "value": "right", "label": "Right" },
+                ],
+                "default": "left"
+            },
+            {
+                "type": "header",
+                "content": "Section Colors"
+            },
+            {
+                "type": "color",
+                "id": "textColor",
+                "label": "Text Color",
+                "default": "#000000"
+            },
+            {
+                "type": "color",
+                "id": "buttonTextColor",
+                "label": "Button Text Color",
+                "default": "#ffffff"
+            },
+            {
+                "type": "color",
+                "id": "buttonBackgroundColor",
+                "label": "Button Background Color",
+                "default": "#000000"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Image Bannner",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}

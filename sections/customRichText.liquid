@@ -1,0 +1,122 @@
+<style>
+    .richText-{{ section.id }} {
+        background: {{ section.settings.sectionBackgroundColor }};
+        padding-top: {{ section.settings.paddingTop }}px;
+        padding-bottom: {{ section.settings.paddingBottom }}px;
+    }
+    .richText-{{ section.id }} .text {
+        font-size: {{ section.settings.fontSizeForDesktop }}px;
+        font-weight: 400;
+        color: {{ section.settings.sectionTextColor }};
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: normal;
+        line-height: normal;
+    }
+    @media screen and (max-width: 767px) {
+       .richText-{{ section.id }} .text {
+            font-size: {{ section.settings.fontSizeForMobile }}
+        } 
+    }
+</style>
+
+<section class="richText-{{ section.id }}">
+    <div class="customContainer">
+        <div class="text small-hide">{{ section.settings.textForDesktop | strip_html }}</div>
+        <div class="text medium-hide large-up-hide">{{ section.settings.textForMobile | strip_html }}</div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Rich Text",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Section Content"
+            },
+            {
+                "type": "richtext",
+                "id": "textForDesktop",
+                "label": "Text For Desktop",
+                "default": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>"
+            },
+            {
+                "type": "richtext",
+                "id": "textForMobile",
+                "label": "Text For Mobile",
+                "default": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>"
+            },
+            {
+                "type": "header",
+                "content": "Section Color" 
+            },
+            {
+                "type": "color",
+                "id": "sectionBackgroundColor",
+                "label": "Section Background Color",
+                "default": "#F5F5F5"
+            },
+            {
+                "type": "color",
+                "id": "sectionTextColor",
+                "label": "Section Text Color",
+                "default": "#000000"
+            },
+            {
+                "type": "header",
+                "content": "Section Font Size"
+            },
+            {
+                "type": "range",
+                "id": "fontSizeForDesktop",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "px",
+                "label": "Padding Top",
+                "default": 16,
+            },
+            {
+                "type": "range",
+                "id": "fontSizeForMobile",
+                "min": 0,
+                "max": 32,
+                "step": 1,
+                "unit": "px",
+                "label": "Padding Top",
+                "default": 14,
+            },
+            {
+                "type": "header",
+                "content": "Section Padding"
+            },
+            {
+                "type": "range",
+                "id": "paddingTop",
+                "min": 0,
+                "max": 100,
+                "step": 2,
+                "unit": "px",
+                "label": "Padding Top",
+                "default": 10,
+            },
+            {
+                "type": "range",
+                "id": "paddingBottom",
+                "min": 0,
+                "max": 100,
+                "step": 2,
+                "unit": "px",
+                "label": "Padding Bottom",
+                "default": 10,
+            }
+        ],
+        "presets": [
+            {
+                "name": "Rich Text",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}

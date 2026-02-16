@@ -4278,3 +4278,34 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+.customContainer {
+  width: 100%;
+  max-width: 1370px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 750px) {
+  .customContainer {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .small-hide {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1199px) {
+  .medium-hide {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .large-up-hide {
+    display: none !important;
+  }
+}

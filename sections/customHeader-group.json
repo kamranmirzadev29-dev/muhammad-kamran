@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "customHeader": {
+      "type": "customHeader",
+      "settings": {
+        "logo": "shopify://shop_images/Group_1000007858.svg",
+        "centerText": "Find the ideal gift for your loved ones.",
+        "buttonText": "choose gift",
+        "buttonLink": "",
+        "headerBackgroundColor": "#f5f5f5",
+        "textColor": "#000000",
+        "buttonBackgroundColor": "#fff544",
+        "headerTopPadding": 10,
+        "headerBottomPadding": 10
+      }
+    }
+  },
+  "order": [
+    "customHeader"
+  ]
+}
